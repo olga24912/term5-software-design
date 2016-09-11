@@ -5,14 +5,10 @@ import java.nio.charset.StandardCharsets;
 
 public class PwdCommand extends Command {
     @Override
-    public ExecutionResult execute(Environment environment, InputStream stdin) {
+    public ExecutionResult execute(Environment environment, InputStream stdin) throws IOException {
         ExecutionResult executionResult = new ExecutionResult();
-        String current = "";
-        try {
-            current = new java.io.File( "." ).getCanonicalPath() + '\n';
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String current;
+        current = new java.io.File( "." ).getCanonicalPath() + '\n';
         InputStream outputStream = new ByteArrayInputStream(current.getBytes(StandardCharsets.UTF_8));
         executionResult.setStdout(outputStream);
         return executionResult;

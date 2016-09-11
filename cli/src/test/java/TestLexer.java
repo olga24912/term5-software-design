@@ -2,13 +2,19 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class TestLexer {
     @Test
     public void testSimple() {
         Lexer lexer = new Lexer();
-        ArrayList<Token> result = lexer.parseString("echo 1");
+        ArrayList<Token> result = null;
+        try {
+            result = lexer.parseString("echo 1");
+        } catch (ParsingException e) {
+            assertFalse(true);
+        }
         ArrayList<Token> answer = new ArrayList<Token>();
         answer.add(new Token("echo", TokenType.TokenCommand));
         answer.add(new Token(" ", TokenType.TokenSpace));
@@ -19,7 +25,12 @@ public class TestLexer {
     @Test
     public void testPipe() {
         Lexer lexer = new Lexer();
-        ArrayList<Token> result = lexer.parseString("echo 1 | cat");
+        ArrayList<Token> result = null;
+        try {
+            result = lexer.parseString("echo 1 | cat");
+        } catch (ParsingException e) {
+            assertFalse(true);
+        }
         ArrayList<Token> answer = new ArrayList<Token>();
         answer.add(new Token("echo", TokenType.TokenCommand));
         answer.add(new Token(" ", TokenType.TokenSpace));
@@ -34,7 +45,12 @@ public class TestLexer {
     @Test
     public void testQuote() {
         Lexer lexer = new Lexer();
-        ArrayList<Token> result = lexer.parseString("echo '1 2 $asd 3'");
+        ArrayList<Token> result = null;
+        try {
+            result = lexer.parseString("echo '1 2 $asd 3'");
+        } catch (ParsingException e) {
+            assertFalse(true);
+        }
         ArrayList<Token> answer = new ArrayList<Token>();
         answer.add(new Token("echo", TokenType.TokenCommand));
         answer.add(new Token(" ", TokenType.TokenSpace));
@@ -47,7 +63,12 @@ public class TestLexer {
     @Test
     public void testDoubleQuote() {
         Lexer lexer = new Lexer();
-        ArrayList<Token> result = lexer.parseString("echo \"1 2 $asd 3 | cat |=\"");
+        ArrayList<Token> result = null;
+        try {
+            result = lexer.parseString("echo \"1 2 $asd 3 | cat |=\"");
+        } catch (ParsingException e) {
+            assertFalse(true);
+        }
         ArrayList<Token> answer = new ArrayList<Token>();
         answer.add(new Token("echo", TokenType.TokenCommand));
         answer.add(new Token(" ", TokenType.TokenSpace));
@@ -62,7 +83,12 @@ public class TestLexer {
     @Test
     public void testAssign() {
         Lexer lexer = new Lexer();
-        ArrayList<Token> result = lexer.parseString("var=$abs");
+        ArrayList<Token> result = null;
+        try {
+            result = lexer.parseString("var=$abs");
+        } catch (ParsingException e) {
+            assertFalse(true);
+        }
         ArrayList<Token> answer = new ArrayList<Token>();
         answer.add(new Token("var", TokenType.TokenVariableName));
         answer.add(new Token("=", TokenType.TokenAssign));

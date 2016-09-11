@@ -4,7 +4,7 @@ public class Parser {
     ArrayList<Token> tokens;
     int position;
 
-    public CommandLine buildAST(ArrayList<Token> tokens) {
+    public CommandLine buildAST(ArrayList<Token> tokens) throws ParsingException {
         this.tokens = tokens;
         position = 0;
         if (tokens.get(0).getType() == TokenType.TokenVariableName) {
@@ -17,7 +17,7 @@ public class Parser {
         }
     }
 
-    private Statement parseStatement() {
+    private Statement parseStatement() throws ParsingException {
         skipBlank();
         if (currentToken().getType() != TokenType.TokenCommand) {
             throw new AssertionError();
@@ -60,7 +60,7 @@ public class Parser {
         }
     }
 
-    private String parseArg() {
+    private String parseArg() throws ParsingException {
         skipBlank();
         Token token = currentToken();
         if (token.getType() == TokenType.TokenText) {
@@ -69,7 +69,7 @@ public class Parser {
         } else if (token.getType() == TokenType.TokenQuote || token.getType() == TokenType.TokenDoubleQuote) {
             ++position;
             if (currentToken().getType() != TokenType.TokenText) {
-                throw new AssertionError();
+                throw new ParsingException("Wait TokenText, but find " + currentToken().getType().name());
             }
             Token retToken = currentToken();
             ++position;

@@ -7,10 +7,6 @@ public class Token {
         this.type = type;
     }
 
-    public void setType(TokenType type) {
-        this.type = type;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -18,8 +14,7 @@ public class Token {
 
         Token token = (Token) o;
 
-        if (textValue != null ? !textValue.equals(token.textValue) : token.textValue != null) return false;
-        return type == token.type;
+        return textValue != null ? textValue.equals(token.textValue) : token.textValue == null && type == token.type;
     }
 
     @Override
@@ -27,11 +22,6 @@ public class Token {
         int result = textValue != null ? textValue.hashCode() : 0;
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
-    }
-
-    public void setTextValue(String textValue) {
-
-        this.textValue = textValue;
     }
 
     public TokenType getType() {

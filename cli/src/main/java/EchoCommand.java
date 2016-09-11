@@ -17,8 +17,6 @@ public class EchoCommand extends Command {
 
         stringBuilder.append('\n');
 
-        result.setExitCode(0);
-        result.setFinishFlag(false);
         result.setStdout(new ByteArrayInputStream(stringBuilder.toString().getBytes()));
         return result;
     }

@@ -4,7 +4,7 @@ public class Lexer {
     private String string;
     private ArrayList<Token> tokens;
 
-    public ArrayList<Token> parseString(String currentLine) {
+    public ArrayList<Token> parseString(String currentLine) throws ParsingException {
         string = currentLine + ' ';
         tokens = new ArrayList<>();
         parseStringFirstText(0);
@@ -14,7 +14,7 @@ public class Lexer {
         return tokens;
     }
 
-    private int parseStringFirstText(int leftPosition) {
+    private int parseStringFirstText(int leftPosition) throws ParsingException {
         int rightPosition = readWord(leftPosition);
 
         if (rightPosition != leftPosition) {
@@ -35,11 +35,13 @@ public class Lexer {
             case '|':
                 tokens.add(new Token("|", TokenType.TokenPipe));
                 return parseStringFirstText(rightPosition + 1);
+            default:
+                throw new ParsingException("Unexpected split symbol: " + string.charAt(rightPosition) +
+                        " on position: "  + String.valueOf(rightPosition));
         }
-        return rightPosition;
     }
 
-    private int parseStringNotFirstText(int leftPosition) {
+    private int parseStringNotFirstText(int leftPosition) throws ParsingException {
         int rightPosition;
         if (leftPosition == string.length()) {
             return leftPosition;
@@ -67,8 +69,10 @@ public class Lexer {
                 tokens.add(new Token("|", TokenType.TokenPipe));
                 tokens.add(new Token(" ", TokenType.TokenSpace));
                 return parseStringFirstText(rightPosition + 2);
+            default:
+                throw new ParsingException("Unexpected split symbol: " + string.charAt(rightPosition) +
+                        " on position: "  + String.valueOf(rightPosition));
         }
-        return rightPosition;
     }
 
     private int parseStringAfterAssign(int leftPosition) {

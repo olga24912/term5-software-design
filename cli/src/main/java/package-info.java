@@ -42,4 +42,6 @@
  *
  * Utils: class with help function
  *
+ * ParsingException: class for exception while split on tokens or parsing
+ *
  **/

@@ -6,17 +6,14 @@ import java.util.ArrayList;
 
 public class CatCommand extends Command {
     @Override
-    public ExecutionResult execute(Environment environment, InputStream stdin) {
+    public ExecutionResult execute(Environment environment, InputStream stdin) throws IOException {
         ExecutionResult executionResult = new ExecutionResult();
         ArrayList<Byte> bytesFromFiles = new ArrayList<>();
 
         if (args.size() > 0) {
             for (String fileName : args) {
-                try {
-                    FileInputStream fileInputStream = new FileInputStream(fileName);
-                    Utils.fromInputStreamToBytes(fileInputStream, bytesFromFiles);
-                } catch (IOException e) {
-                }
+                FileInputStream fileInputStream = new FileInputStream(fileName);
+                Utils.fromInputStreamToBytes(fileInputStream, bytesFromFiles);
             }
             byte[] bytes = new byte[bytesFromFiles.size()];
             for (int i = 0; i < bytesFromFiles.size(); ++i) {

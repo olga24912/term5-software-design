@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.InputStream;
 
 public class PipeCommand extends Statement {
@@ -10,7 +11,7 @@ public class PipeCommand extends Statement {
     }
 
     @Override
-    public ExecutionResult execute(Environment environment, InputStream stdin) {
+    public ExecutionResult execute(Environment environment, InputStream stdin) throws IOException {
         ExecutionResult executionResult = left.execute(environment, stdin);
         if (executionResult.isFinishFlag()) {
             return executionResult;

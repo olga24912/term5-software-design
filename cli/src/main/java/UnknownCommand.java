@@ -10,7 +10,7 @@ public class UnknownCommand extends Command {
     }
 
     @Override
-    public ExecutionResult execute(Environment environment, InputStream stdin) {
+    public ExecutionResult execute(Environment environment, InputStream stdin) throws IOException {
         ExecutionResult executionResult = new ExecutionResult();
 
         String[] command = new String[args.size() + 1];
@@ -54,7 +54,6 @@ public class UnknownCommand extends Command {
         }
 
         executionResult.setStdout(process.getInputStream());
-        executionResult.setExitCode(process.exitValue());
         return executionResult;
     }
 }
