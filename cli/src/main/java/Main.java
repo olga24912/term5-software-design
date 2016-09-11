@@ -16,13 +16,7 @@ public class Main {
         while(!finishFlag) {
             try {
                 String currentLine = in.nextLine();
-                ArrayList<Token> tokens;
-                tokens = lexer.parseString(currentLine);
-                String newLine = environment.substituteVariable(tokens);
-                tokens = lexer.parseString(newLine);
-                CommandLine cl = parser.buildAST(tokens);
-                ExecutionResult executionResult = cl.execute(environment, System.in);
-
+                ExecutionResult executionResult = processOneLine(currentLine, lexer, environment, parser);
                 if (executionResult.getStdout() != null) {
                     byte[] buffer = new byte[1024];
                     int readBytes;
@@ -40,5 +34,16 @@ public class Main {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static ExecutionResult processOneLine(String currentLine, Lexer lexer,
+                                                  Environment environment, Parser parser)
+            throws ParsingException, IOException {
+        ArrayList<Token> tokens;
+        tokens = lexer.parseString(currentLine);
+        String newLine = environment.substituteVariable(tokens);
+        tokens = lexer.parseString(newLine);
+        CommandLine cl = parser.buildAST(tokens);
+        return cl.execute(environment, System.in);
     }
 }
