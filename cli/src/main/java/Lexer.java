@@ -1,9 +1,20 @@
 import java.util.ArrayList;
 
+/**
+ * Class that parse string to tokens.
+ */
+
 public class Lexer {
     private String string;
     private ArrayList<Token> tokens;
 
+    /**
+     * Split string on tokens
+     *
+     * @param currentLine string that we like to split on token
+     * @return splitting on tokens
+     * @throws ParsingException
+     */
     public ArrayList<Token> parseString(String currentLine) throws ParsingException {
         string = currentLine + ' ';
         tokens = new ArrayList<>();

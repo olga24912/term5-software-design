@@ -1,3 +1,9 @@
+/**
+ * Lexer split string on tokens
+ *
+ * textValue - for return from token to string
+ * type - enum TokenType
+ */
 public class Token {
     private String textValue;
     private TokenType type;

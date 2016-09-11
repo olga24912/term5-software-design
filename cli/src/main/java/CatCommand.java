@@ -4,6 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+/**
+ * Class for command cat
+ *
+ * args - it is names of files
+ * write concatenation content of files,
+ * if count of args = 0, write from inputStream
+ * if count of args > 0, ignore inputStream
+ */
 public class CatCommand extends Command {
     @Override
     public ExecutionResult execute(Environment environment, InputStream stdin) throws IOException {

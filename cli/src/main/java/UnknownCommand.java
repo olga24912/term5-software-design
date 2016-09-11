@@ -2,6 +2,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Class for command that we have not realisation for.
+ *
+ * Try to call command use process for that
+ * ignore inputStream,.
+ */
 public class UnknownCommand extends Command {
     String name;
 
@@ -29,22 +35,12 @@ public class UnknownCommand extends Command {
         }
         processBuilder.redirectOutput(ProcessBuilder.Redirect.PIPE);
 
-        Process process;
-        try {
-            process = processBuilder.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        Process process = processBuilder.start();
 
         if (stdin != System.in) {
             OutputStream processStdin = process.getOutputStream();
             Utils.fromInputStreamToOutputStream(stdin, processStdin);
-            try {
-                processStdin.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            processStdin.close();
         }
 
         try {

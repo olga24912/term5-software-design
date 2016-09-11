@@ -3,7 +3,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * class for some helping function
+ */
 public class Utils {
+    /**
+     * Read from input stream to output stream
+     * @param in input stream
+     * @param out output stream
+     * @throws IOException
+     */
     public static void fromInputStreamToOutputStream(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int readBytes;
@@ -12,6 +21,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Read from input stream to ArrayList of bytes
+     * @param in input stream
+     * @param bytes ArrayList of bytes
+     * @throws IOException
+     */
     public static void fromInputStreamToBytes(InputStream in, ArrayList<Byte> bytes) throws IOException {
         byte[] buffer = new byte[1024];
         int readBytes;

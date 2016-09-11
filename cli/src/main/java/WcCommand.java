@@ -1,6 +1,16 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Class for command echo
+ *
+ * args - names of files;
+ *
+ * ignore inputStream if args > 0,
+ * if args = 0 write count of lines, words and bytes of input to inputStream in ExecutionResult
+ * if args > 0 write summery count of lines, words and bytes in all files to inputStream in ExecutionResult
+ */
+
 public class WcCommand extends Command {
     @Override
     public ExecutionResult execute(Environment environment, InputStream stdin) throws IOException {

@@ -1,6 +1,12 @@
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+/**
+ * Class for command echo
+ *
+ * ignore inputStream,
+ * write to inputStream in ExecutionResult concatenation of args with space between them.
+ */
 public class EchoCommand extends Command {
     @Override
     public ExecutionResult execute(Environment environment, InputStream stdin) {

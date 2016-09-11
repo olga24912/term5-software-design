@@ -1,9 +1,19 @@
 import java.util.ArrayList;
 
+/**
+ * construct AST from tokens, that we can execute
+ */
 public class Parser {
     ArrayList<Token> tokens;
     int position;
 
+    /**
+     * build AST from tokens
+     *
+     * @param tokens result of lexer
+     * @return root of AST, that we can execute
+     * @throws ParsingException
+     */
     public CommandLine buildAST(ArrayList<Token> tokens) throws ParsingException {
         this.tokens = tokens;
         position = 0;
