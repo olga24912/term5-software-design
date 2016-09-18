@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import ru.spbau.mit.*;
 
 import java.io.File;
 import java.io.IOException;
