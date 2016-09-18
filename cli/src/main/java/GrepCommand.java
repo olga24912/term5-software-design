@@ -88,6 +88,7 @@ public class GrepCommand extends Command {
         int cntLineToPrint = 0;
 
         while ((strLine = br.readLine()) != null) {
+            String realLine = strLine;
             if (!registerSensitive) {
                 strLine = strLine.toLowerCase();
             }
@@ -111,7 +112,7 @@ public class GrepCommand extends Command {
             }
             if (cntLineToPrint > 0) {
                 --cntLineToPrint;
-                grepResult.append(strLine);
+                grepResult.append(realLine);
                 grepResult.append("\n");
             }
         }
