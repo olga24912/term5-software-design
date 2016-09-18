@@ -1,4 +1,8 @@
 import org.junit.Test;
+import ru.spbau.mit.Environment;
+import ru.spbau.mit.Lexer;
+import ru.spbau.mit.ParsingException;
+import ru.spbau.mit.Token;
 
 import java.util.ArrayList;
 
