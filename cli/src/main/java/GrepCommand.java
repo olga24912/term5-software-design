@@ -9,6 +9,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * class for command grep
+ * find line with matching substring
+ * flags:
+ * -w if match only full word
+ * -i NOT register sensitive
+ * -A n count of line after matching line
+ *
+ * take regexp and after that files names
+ * ignore input stream if have some files name
+ */
 public class GrepCommand extends Command {
     private String regex;
     private StringBuilder grepResult;
