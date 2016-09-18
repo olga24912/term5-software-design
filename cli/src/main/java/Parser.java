@@ -50,6 +50,9 @@ public class Parser {
             case "wc":
                 currentCommand = new WcCommand();
                 break;
+            case "grep":
+                currentCommand = new GrepCommand();
+                break;
             default:
                 currentCommand = new UnknownCommand(currentToken().getTextValue());
                 break;
@@ -58,7 +61,7 @@ public class Parser {
         ++position;
         skipBlank();
         while(position < tokens.size() && currentToken().getType() != TokenType.TokenPipe) {
-            currentCommand.addArg(parseArg());
+            parseArg(currentCommand);
             skipBlank();
         }
 
@@ -70,24 +73,25 @@ public class Parser {
         }
     }
 
-    private String parseArg() throws ParsingException {
+    private void parseArg(Command command) throws ParsingException {
         skipBlank();
         Token token = currentToken();
         if (token.getType() == TokenType.TokenText) {
             ++position;
-            return token.getTextValue();
+            command.addArg(token.getTextValue());
+            return;
         } else if (token.getType() == TokenType.TokenQuote || token.getType() == TokenType.TokenDoubleQuote) {
             ++position;
             if (currentToken().getType() != TokenType.TokenText) {
                 throw new ParsingException("Wait TokenText, but find " + currentToken().getType().name());
             }
-            Token retToken = currentToken();
+            command.addArg(currentToken().getTextValue());
             ++position;
             if (currentToken().getType() != token.getType()) {
                 throw new AssertionError();
             }
             ++position;
-            return retToken.getTextValue();
+            return;
         }
         throw new AssertionError();
     }

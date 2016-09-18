@@ -5,7 +5,6 @@ import java.util.Map;
 /**
  * Class for store values of variables
  */
-
 public class Environment {
     private Map<String, String> variable = new HashMap<>();
 

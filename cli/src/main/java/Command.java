@@ -3,7 +3,6 @@ import java.util.ArrayList;
 /**
  * abstract class for all commands (like echo, pwd, wc, ..., NOT for: =, |)
  */
-
 public abstract class Command extends Statement {
     protected ArrayList<String> args;
 

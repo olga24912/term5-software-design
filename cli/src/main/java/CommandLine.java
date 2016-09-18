@@ -4,7 +4,6 @@ import java.io.InputStream;
 /**
  * interface for all type of command include pipe and assign.
  */
-
 public interface CommandLine {
     /**
      * Run the command

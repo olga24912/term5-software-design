@@ -1,3 +1,4 @@
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -35,6 +36,9 @@ public class Utils {
                 bytes.add(buffer[i]);
             }
         }
+    }
 
+    public static InputStream fromStringToInputStream (String s) {
+        return new ByteArrayInputStream(s.getBytes());
     }
 }
