@@ -36,7 +36,6 @@
  *              -PwdCommand
  *              -UnknownCommand
  *              -WcCommand
- *              -GrepCommand
  *
  *      methods: execute() - take Environment and inputStream
  *                           return ExecutionResult (result in inputStream and FinishFlag(become true in exit command))
