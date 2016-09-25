@@ -17,8 +17,13 @@ public class Token {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Token token = (Token) o;
 
@@ -33,12 +38,10 @@ public class Token {
     }
 
     public TokenType getType() {
-
         return type;
     }
 
     public String getTextValue() {
-
         return textValue;
     }
 
