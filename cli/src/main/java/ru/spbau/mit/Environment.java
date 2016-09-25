@@ -26,7 +26,11 @@ public class Environment {
         return result.toString();
     }
 
-    // get variable value
+    /**
+     * get variable value
+     * @param name of variable
+     * @return variable value
+     */
     public String getVariable(String name) {
         if (variable.containsKey(name)) {
             return variable.get(name);
@@ -34,7 +38,11 @@ public class Environment {
         return "";
     }
 
-    // change variable value
+    /**
+     * change variable value
+     * @param name of variable
+     * @param value new value of var
+     */
     public void setVariable(String name, String value) {
         variable.put(name, value);
     }

@@ -24,7 +24,10 @@ public abstract class Command extends Statement {
         return args.size();
     }
 
-    //add argument for command
+    /**
+     * add argument for command
+     * @param val - value of new arg
+     */
     public void addArg(String val) {
         args.add(val);
     }
