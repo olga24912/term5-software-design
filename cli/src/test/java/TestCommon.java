@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 public class TestCommon {
     private Lexer lexer;
@@ -31,7 +32,7 @@ public class TestCommon {
         try {
             tempFile = File.createTempFile("tmp", ".tmp");
         } catch (IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         PrintWriter writer = null;
@@ -39,7 +40,7 @@ public class TestCommon {
         try {
             writer = new PrintWriter(tempFile.getCanonicalPath());
         } catch (IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         writer.println("The first line");
@@ -53,7 +54,7 @@ public class TestCommon {
         try {
             executionResult = Main.processOneLine(command, lexer, environment, parser);
         } catch (ParsingException | IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         assertFalse(executionResult == null);
@@ -64,7 +65,7 @@ public class TestCommon {
             result = scanner.next();
             assertEquals("1 2 3\n", result);
         } else {
-            assertFalse(true);
+            fail();
         }
     }
 
@@ -74,7 +75,7 @@ public class TestCommon {
         try {
             executionResult = Main.processOneLine(command, lexer, environment, parser);
         } catch (ParsingException | IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         assertFalse(executionResult == null);
@@ -87,7 +88,7 @@ public class TestCommon {
         try {
             executionResult = Main.processOneLine(command, lexer, environment, parser);
         } catch (ParsingException | IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         assertFalse(executionResult == null);
@@ -99,13 +100,13 @@ public class TestCommon {
         try {
             command = "wc " + tempFile.getCanonicalPath();
         } catch (IOException e) {
-            assertFalse(true);
+            fail();
         }
         ExecutionResult executionResult = null;
         try {
             executionResult = Main.processOneLine(command, lexer, environment, parser);
         } catch (ParsingException | IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         assertFalse(executionResult == null);
@@ -116,7 +117,7 @@ public class TestCommon {
             result = scanner.next();
             assertEquals("3 6 31\n", result);
         } else {
-            assertFalse(true);
+            fail();
         }
     }
 
@@ -125,13 +126,13 @@ public class TestCommon {
         try {
             command = "cat " + tempFile.getCanonicalPath();
         } catch (IOException e) {
-            assertFalse(true);
+            fail();
         }
         ExecutionResult executionResult = null;
         try {
             executionResult = Main.processOneLine(command, lexer, environment, parser);
         } catch (ParsingException | IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         assertFalse(executionResult == null);
@@ -142,7 +143,7 @@ public class TestCommon {
             result = scanner.next();
             assertEquals("The first line\nThe second line\n", result);
         } else {
-            assertFalse(true);
+            fail();
         }
     }
 
@@ -152,7 +153,7 @@ public class TestCommon {
         try {
             executionResult = Main.processOneLine(command, lexer, environment, parser);
         } catch (ParsingException | IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         assertFalse(executionResult == null);
@@ -164,10 +165,10 @@ public class TestCommon {
             try {
                 assertEquals(new File( "." ).getCanonicalPath() + '\n', result);
             } catch (IOException e) {
-                assertFalse(true);
+                fail();
             }
         } else {
-            assertFalse(true);
+            fail();
         }
     }
 
@@ -177,7 +178,7 @@ public class TestCommon {
         try {
             executionResult = Main.processOneLine(command, lexer, environment, parser);
         } catch (ParsingException | IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         assertFalse(executionResult == null);
@@ -188,7 +189,7 @@ public class TestCommon {
             result = scanner.next();
             assertEquals("1 1 2\n", result);
         } else {
-            assertFalse(true);
+            fail();
         }
     }
 
@@ -198,7 +199,7 @@ public class TestCommon {
         try {
             executionResult = Main.processOneLine(command, lexer, environment, parser);
         } catch (ParsingException | IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         assertFalse(executionResult == null);
@@ -209,7 +210,7 @@ public class TestCommon {
             result = scanner.next();
             assertEquals(" 3432 \n", result);
         } else {
-            assertFalse(true);
+            fail();
         }
     }
 
@@ -219,7 +220,7 @@ public class TestCommon {
         try {
             executionResult = Main.processOneLine(command, lexer, environment, parser);
         } catch (ParsingException | IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         assertFalse(executionResult == null);
@@ -230,7 +231,7 @@ public class TestCommon {
             result = scanner.next();
             assertEquals("\n", result);
         } else {
-            assertFalse(true);
+            fail();
         }
     }
 }
