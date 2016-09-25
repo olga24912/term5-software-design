@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 /** construct AST from tokens, that we can execute */
 public class Parser {
-    ArrayList<Token> tokens;
-    int position;
+    private ArrayList<Token> tokens;
+    private int position;
 
     /**
      * build AST from tokens
