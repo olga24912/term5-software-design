@@ -70,6 +70,9 @@ public class Parser {
             case "wc":
                 currentCommand = new WcCommand();
                 break;
+            case "grep":
+                currentCommand = new GrepCommand();
+                break;
             default:
                 currentCommand = new UnknownCommand(currentToken().getTextValue());
                 break;
