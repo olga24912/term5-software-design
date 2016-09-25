@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Class for command pwd
+ * Class for 'exit' command
  *
  * ignore inputStream,
  * write to inputStream in ExecutionResult path to current directory

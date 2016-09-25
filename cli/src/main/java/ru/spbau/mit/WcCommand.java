@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Class for command echo
+ * Class for 'wc'command
  *
  * args - names of files;
  *

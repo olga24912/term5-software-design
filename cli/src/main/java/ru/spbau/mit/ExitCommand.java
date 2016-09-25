@@ -3,7 +3,7 @@ package ru.spbau.mit;
 import java.io.InputStream;
 
 /**
- * Class for command exit
+ * Class for 'exit' command
  *
  * ignore inputStream,
  * put the finishFlag = true in ExecutionResult

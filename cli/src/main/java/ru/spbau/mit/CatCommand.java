@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * Class for command cat
+ * Class for 'cat' command
  *
  * args - it is names of files
  * write concatenation content of files,
