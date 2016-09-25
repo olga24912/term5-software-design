@@ -232,4 +232,81 @@ public class TestCommon {
             fail();
         }
     }
+
+    @Test
+    public void testGrep() {
+        try {
+            command = "grep " + " \"f[a-z]{2,3}t\" " + tempFile.getCanonicalPath();
+        } catch (IOException e) {
+            fail();
+        }
+        ExecutionResult executionResult = null;
+        try {
+            executionResult = Main.processOneLine(command, lexer, environment, parser);
+        } catch (ParsingException | IOException e) {
+            fail();
+        }
+
+        assertFalse(executionResult == null);
+
+        if (executionResult.getStdout() != null) {
+            String result;
+            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+            result = scanner.next();
+            assertEquals("The first line\n", result);
+        } else {
+            fail();
+        }
+    }
+
+    @Test
+    public void testGrepFlag() {
+        try {
+            command = "grep " + " -w -i -A 2 \"F[a-z]{2,3}T\" " + tempFile.getCanonicalPath();
+        } catch (IOException e) {
+            fail();
+        }
+        ExecutionResult executionResult = null;
+        try {
+            executionResult = Main.processOneLine(command, lexer, environment, parser);
+        } catch (ParsingException | IOException e) {
+            fail();
+        }
+
+        assertNotNull(executionResult);
+
+        if (executionResult.getStdout() != null) {
+            String result;
+            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+            result = scanner.next();
+            assertEquals("The first line\nThe second line\n", result);
+        } else {
+            fail();
+        }
+    }
+
+    @Test
+    public void testGrepPipe() {
+        command = "echo \"sdfdfirstsdf\naaaa\nfirst\na\na\n\na\" | grep " + " -i -A 2 \"F[a-z]{2,3}T\" ";
+        ExecutionResult executionResult = null;
+        try {
+            executionResult = Main.processOneLine(command, lexer, environment, parser);
+        } catch (ParsingException | IOException e) {
+            fail();
+        }
+
+        assertNotNull(executionResult);
+
+        if (executionResult.getStdout() != null) {
+            String result;
+            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+            result = scanner.next();
+            assertEquals("sdfdfirstsdf\n" +
+                    "aaaa\n" +
+                    "first\n" +
+                    "a\n", result);
+        } else {
+            fail();
+        }
+    }
 }
