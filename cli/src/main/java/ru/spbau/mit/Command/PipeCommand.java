@@ -11,8 +11,8 @@ import java.io.InputStream;
  * Have left part of command and right part
  */
 public class PipeCommand extends Statement {
-    Statement left;
-    Statement right;
+    private Statement left;
+    private Statement right;
 
     public PipeCommand(Statement left, Statement right) {
         this.left = left;
