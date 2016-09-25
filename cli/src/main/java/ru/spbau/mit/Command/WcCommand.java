@@ -34,7 +34,9 @@ public class WcCommand extends Command {
                         sc.next();
                         ++cntWord;
                     }
+                    sc.close();
                 }
+                fileInputStream.close();
                 LineNumberReader lnr = new LineNumberReader(new FileReader(file));
                 lnr.skip(Long.MAX_VALUE);
                 cntLine += lnr.getLineNumber() + 1;
