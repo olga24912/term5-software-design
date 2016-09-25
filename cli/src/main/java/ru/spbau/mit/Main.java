@@ -1,5 +1,7 @@
 package ru.spbau.mit;
 
+import ru.spbau.mit.Command.CommandLine;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;

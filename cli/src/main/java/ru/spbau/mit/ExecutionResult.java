@@ -2,6 +2,10 @@ package ru.spbau.mit;
 
 import java.io.InputStream;
 
+/**
+ * commands return that class
+ * write the result to stdout
+ */
 public class ExecutionResult {
     private boolean finishFlag;
     private InputStream stdout;

@@ -1,5 +1,7 @@
 package ru.spbau.mit;
 
+import ru.spbau.mit.Command.*;
+
 import java.util.ArrayList;
 
 /** construct AST from tokens, that we can execute */
