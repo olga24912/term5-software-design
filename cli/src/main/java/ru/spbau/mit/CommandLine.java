@@ -3,9 +3,7 @@ package ru.spbau.mit;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * interface for all type of command include pipe and assign.
- */
+/** interface for all type of command, including pipe and assign */
 public interface CommandLine {
     /**
      * Run the command

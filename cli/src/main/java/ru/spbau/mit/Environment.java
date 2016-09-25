@@ -16,8 +16,8 @@ public class Environment {
      * @param tokens that string split on.
      * @return change variable token to value and merge tokens to string
      */
-    public String substituteVariable(ArrayList<Token> tokens) {
-        StringBuilder  result = new StringBuilder();
+     public String substituteVariable(ArrayList<Token> tokens) {
+        StringBuilder result = new StringBuilder();
         for (Token token : tokens) {
             result.append(token.substitute(this));
         }
