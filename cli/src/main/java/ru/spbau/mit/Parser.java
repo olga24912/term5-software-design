@@ -2,9 +2,7 @@ package ru.spbau.mit;
 
 import java.util.ArrayList;
 
-/**
- * construct AST from tokens, that we can execute
- */
+/** construct AST from tokens, that we can execute */
 public class Parser {
     ArrayList<Token> tokens;
     int position;

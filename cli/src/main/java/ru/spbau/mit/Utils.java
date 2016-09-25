@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-/**
- * class for some helping function
- */
+/** class for some helping function */
 public class Utils {
     /**
      * Read from input stream to output stream

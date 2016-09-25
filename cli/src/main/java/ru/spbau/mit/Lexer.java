@@ -2,9 +2,7 @@ package ru.spbau.mit;
 
 import java.util.ArrayList;
 
-/**
- * Class that parse string to tokens.
- */
+/** Class that parse string to tokens.*/
 public class Lexer {
     private String string;
     private ArrayList<Token> tokens;

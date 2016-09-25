@@ -2,9 +2,7 @@ package ru.spbau.mit;
 
 import java.util.ArrayList;
 
-/**
- * abstract class for all commands (like echo, pwd, wc, ..., NOT for: =, |)
- */
+/** abstract class for all commands (like echo, pwd, wc, ..., NOT for: =, |) */
 public abstract class Command extends Statement {
     private ArrayList<String> args;
 
