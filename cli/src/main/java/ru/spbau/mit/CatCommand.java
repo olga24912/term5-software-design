@@ -24,6 +24,7 @@ public class CatCommand extends Command {
             for (String fileName : getArgs()) {
                 FileInputStream fileInputStream = new FileInputStream(fileName);
                 Utils.fromInputStreamToBytes(fileInputStream, bytesFromFiles);
+                fileInputStream.close();
             }
             byte[] bytes = new byte[bytesFromFiles.size()];
             for (int i = 0; i < bytesFromFiles.size(); ++i) {
