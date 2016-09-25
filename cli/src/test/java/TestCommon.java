@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class TestCommon {
     private Lexer lexer;
@@ -57,7 +55,7 @@ public class TestCommon {
             fail();
         }
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
 
         if (executionResult.getStdout() != null) {
             String result;
@@ -78,7 +76,7 @@ public class TestCommon {
             fail();
         }
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
         assert(executionResult.isFinishFlag());
     }
 
@@ -91,7 +89,7 @@ public class TestCommon {
             fail();
         }
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
         assertEquals(environment.getVariable("a"), "b");
     }
 
@@ -109,7 +107,7 @@ public class TestCommon {
             fail();
         }
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
 
         if (executionResult.getStdout() != null) {
             String result;
@@ -135,7 +133,7 @@ public class TestCommon {
             fail();
         }
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
 
         if (executionResult.getStdout() != null) {
             String result;
@@ -156,7 +154,7 @@ public class TestCommon {
             fail();
         }
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
 
         if (executionResult.getStdout() != null) {
             String result;
@@ -181,7 +179,7 @@ public class TestCommon {
             fail();
         }
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
 
         if (executionResult.getStdout() != null) {
             String result;
@@ -202,7 +200,7 @@ public class TestCommon {
             fail();
         }
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
 
         if (executionResult.getStdout() != null) {
             String result;
@@ -223,7 +221,7 @@ public class TestCommon {
             fail();
         }
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
 
         if (executionResult.getStdout() != null) {
             String result;
