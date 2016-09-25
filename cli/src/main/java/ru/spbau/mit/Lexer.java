@@ -68,9 +68,9 @@ public class Lexer {
             rightPosition = readWord(leftPosition);
             if (leftPosition != rightPosition) {
                 tokens.add(new Token(string.substring(leftPosition, rightPosition), TokenType.TokenText));
-
             }
         }
+
         switch (string.charAt(rightPosition)) {
             case ' ':
                 tokens.add(new Token(" ", TokenType.TokenSpace));
