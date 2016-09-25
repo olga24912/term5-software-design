@@ -1,6 +1,5 @@
 package ru.spbau.mit.Command;
 
-import ru.spbau.mit.Command.Command;
 import ru.spbau.mit.Environment;
 import ru.spbau.mit.ExecutionResult;
 
@@ -21,7 +20,9 @@ public class WcCommand extends Command {
     public ExecutionResult execute(Environment environment, InputStream stdin) throws IOException {
         ExecutionResult executionResult = new ExecutionResult();
 
-        int cntLine = 0, cntWord = 0, cntBytes = 0;
+        int cntLine = 0;
+        int cntWord = 0;
+        int cntBytes = 0;
 
         if (argSize() > 0) {
             for (String fileName : getArgs()) {
