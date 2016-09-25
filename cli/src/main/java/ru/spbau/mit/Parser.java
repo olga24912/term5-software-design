@@ -35,6 +35,24 @@ public class Parser {
             throw new AssertionError();
         }
 
+        Command currentCommand = getCommand();
+
+        ++position;
+        skipBlank();
+        while(position < tokens.size() && currentToken().getType() != TokenType.TokenPipe) {
+            currentCommand.addArg(parseArg());
+            skipBlank();
+        }
+
+        if (position == tokens.size()) {
+            return currentCommand;
+        } else {
+            ++position;
+            return new PipeCommand(currentCommand, parseStatement());
+        }
+    }
+
+    private Command getCommand() {
         Command currentCommand;
         switch (currentToken().getTextValue()) {
             case "echo":
@@ -56,20 +74,7 @@ public class Parser {
                 currentCommand = new UnknownCommand(currentToken().getTextValue());
                 break;
         }
-
-        ++position;
-        skipBlank();
-        while(position < tokens.size() && currentToken().getType() != TokenType.TokenPipe) {
-            currentCommand.addArg(parseArg());
-            skipBlank();
-        }
-
-        if (position == tokens.size()) {
-            return currentCommand;
-        } else {
-            ++position;
-            return new PipeCommand(currentCommand, parseStatement());
-        }
+        return currentCommand;
     }
 
     private String parseArg() throws ParsingException {
