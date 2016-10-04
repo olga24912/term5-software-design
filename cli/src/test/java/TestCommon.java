@@ -5,10 +5,12 @@ import ru.spbau.mit.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class TestCommon {
     private Lexer lexer;
@@ -309,5 +311,27 @@ public class TestCommon {
         } else {
             assertFalse(true);
         }
+    }
+
+    @Test
+    public void testLs() throws ParsingException, IOException {
+        command = "ls ./src/test/testfs/";
+        ExecutionResult executionResult;
+
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
+        Scanner scanner = new Scanner(executionResult.getStdout());
+        assertTrue(scanner.hasNextLine());
+        Set<String> result = new HashSet<>(Arrays.asList(scanner.nextLine().split(" ")));
+        Set<String> lsAnswer = new HashSet<>(Arrays.asList("A", "B"));
+        assertEquals(lsAnswer, result);
+    }
+
+    @Test
+    public void testCd() throws IOException, ParsingException {
+        String directory = "./src/test/testfs/";
+        String answerDirectory = new File(directory).getCanonicalPath();
+        command = "cd " + directory;
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
+        assertEquals(answerDirectory, new File(System.getProperty("user.dir")).getCanonicalPath());
     }
 }

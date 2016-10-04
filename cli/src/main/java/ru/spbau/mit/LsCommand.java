@@ -17,14 +17,16 @@ public class LsCommand extends Command {
 
     @Override
     public ExecutionResult execute(Environment environment, InputStream stdin) throws IOException {
-        File[] files;
+        File[] files = new File[0];
 
         if (argSize() > 0) {
             File directory = new File(getArg(0));
-            if (directory.isDirectory()) {
-                files = new File(getArg(0)).listFiles();
-            } else {
-                files = new File[] { directory };
+            if (directory.exists()) {
+                if (directory.isDirectory()) {
+                    files = new File(getArg(0)).listFiles();
+                } else {
+                    files = new File[]{directory};
+                }
             }
         } else {
             files = new File(System.getProperty("user.dir")).listFiles();
@@ -34,7 +36,7 @@ public class LsCommand extends Command {
 
         for (File file : files) {
             output.append(file.getName());
-            output.append("\n");
+            output.append(" ");
         }
 
         ExecutionResult executionResult = new ExecutionResult();
