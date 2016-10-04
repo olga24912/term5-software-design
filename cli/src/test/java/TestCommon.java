@@ -319,10 +319,13 @@ public class TestCommon {
         ExecutionResult executionResult;
 
         executionResult = Main.processOneLine(command, lexer, environment, parser);
+
         Scanner scanner = new Scanner(executionResult.getStdout());
         assertTrue(scanner.hasNextLine());
+
         Set<String> result = new HashSet<>(Arrays.asList(scanner.nextLine().split(" ")));
         Set<String> lsAnswer = new HashSet<>(Arrays.asList("A", "B"));
+
         assertEquals(lsAnswer, result);
     }
 
@@ -331,7 +334,9 @@ public class TestCommon {
         String directory = "./src/test/testfs/";
         String answerDirectory = new File(directory).getCanonicalPath();
         command = "cd " + directory;
+
         executionResult = Main.processOneLine(command, lexer, environment, parser);
+
         assertEquals(answerDirectory, new File(System.getProperty("user.dir")).getCanonicalPath());
     }
 }
