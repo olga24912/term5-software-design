@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * Panel for putting Server/Client host, port and name
+ */
 public class LoginPanel extends JPanel  {
     private static final Logger LOG = Logger.getLogger(LoginPanel.class);
 

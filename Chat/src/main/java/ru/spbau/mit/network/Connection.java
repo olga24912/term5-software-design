@@ -9,6 +9,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+/**
+ * Class for sending messages in current connection.
+ */
 public class Connection {
     private static final Byte MSG_QUERY = 0;
     private static final Byte CONNECT_QUERY = 1;

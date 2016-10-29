@@ -64,7 +64,7 @@ public class SwingGUIManager implements GUIManager {
         loginFrame.setVisible(true);
     }
 
-    //Call for sending message
+    //Send message
     public void sendMsg(String text) {
         connection.sendMsg(text);
     }
@@ -75,7 +75,7 @@ public class SwingGUIManager implements GUIManager {
         chatPanel.newMsg(msg);
     }
 
-    //Call for starting interaction with network
+    //Start interaction with network
     public void startConnecting(ConnectionCreator creator) {
         this.creator = creator;
         loginFrame.setVisible(false);
@@ -98,7 +98,7 @@ public class SwingGUIManager implements GUIManager {
         }
     }
 
-    //Call for stopping connection
+    //Stop connection
     public void abortConnection() {
         creator.cancel();
         loginFrame.setVisible(true);

@@ -8,7 +8,8 @@ import java.io.IOException;
  * interface for create connection
  */
 public interface ConnectionCreator {
-     // Call for starting connection
+     //Start connection
      void connect(GUIManager mng) throws IOException;
+     //Stop connection
      void cancel();
 }

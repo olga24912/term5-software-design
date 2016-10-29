@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * Main panel for chat
+ */
 public class ChatPanel extends JPanel {
     private static final Logger LOG = Logger.getLogger(ChatPanel.class);
 
