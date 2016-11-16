@@ -14,8 +14,8 @@ public class Assignment implements CommandLine {
 
     /**
      * var=data
-     * @param var - name of variable
-     * @param data - new value
+     * @param var name of variable
+     * @param data new value
      */
     public Assignment(String var, String data) {
         this.var = var;
