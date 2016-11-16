@@ -39,7 +39,7 @@ public class Parser {
 
         ++position;
         skipBlank();
-        while(position < tokens.size() && currentToken().getType() != TokenType.TokenPipe) {
+        while (position < tokens.size() && currentToken().getType() != TokenType.TokenPipe) {
             currentCommand.addArg(parseArg());
             skipBlank();
         }

@@ -39,6 +39,11 @@ public class Utils {
 
     }
 
+    /**
+     * Generate input stream with string s from string s
+     * @param s input data
+     * @return input stream with string s
+     */
     public static InputStream fromStringToInputStream (String s) {
         return new ByteArrayInputStream(s.getBytes());
     }

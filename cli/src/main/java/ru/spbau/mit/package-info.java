@@ -1,7 +1,7 @@
 /**
- * This project contain next classes:
+ * This project contains next classes:
  *  Main:
- *      methods: main() - contain Environment, Lexer, Parse
+ *      methods: main() - contains Environment, Lexer, Parse
  *                        read string,
  *                        split to Token use Lexer,
  *                        use Environment for substitute variable,
