@@ -14,7 +14,7 @@ public class Parser {
      *
      * @param tokens result of lexer
      * @return root of AST, that we can execute
-     * @throws ParsingException
+     * @throws ParsingException throws when expression isn't correct.
      */
     public CommandLine buildAST(ArrayList<Token> tokens) throws ParsingException {
         this.tokens = tokens;

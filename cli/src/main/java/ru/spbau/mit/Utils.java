@@ -12,7 +12,7 @@ public class Utils {
      * Read from input stream to output stream
      * @param in input stream
      * @param out output stream
-     * @throws IOException
+     * @throws IOException throws when you cann't read from inputStream or write in outputStream
      */
     public static void fromInputStreamToOutputStream(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
@@ -26,7 +26,7 @@ public class Utils {
      * Read from input stream to ArrayList of bytes
      * @param in input stream
      * @param bytes ArrayList of bytes
-     * @throws IOException
+     * @throws IOException throws when you cann't read from inputStream
      */
     public static void fromInputStreamToBytes(InputStream in, ArrayList<Byte> bytes) throws IOException {
         byte[] buffer = new byte[1024];

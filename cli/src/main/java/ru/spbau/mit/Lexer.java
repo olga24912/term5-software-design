@@ -12,7 +12,7 @@ public class Lexer {
      *
      * @param currentLine string that we like to split on token
      * @return splitting on tokens
-     * @throws ParsingException
+     * @throws ParsingException throws when expression isn't correct.
      */
     public ArrayList<Token> parseString(String currentLine) throws ParsingException {
         string = currentLine + ' ';

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Class for 'cat' command
  *
  * args - it is names of files
- * write concatenation content of files,
+ * writes concatenation of contents of the files,
  * if count of args = 0, write from inputStream
  * if count of args > 0, ignore inputStream
  */
