@@ -9,7 +9,6 @@ import ru.spbau.mit.Utils;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -92,32 +91,26 @@ public class GrepCommand extends Command {
         String strLine;
         int cntLineToPrint = 0;
 
+        if (onlyFullWord) {
+            regex = "\\b" + regex + "\\b";
+        }
+
+        Pattern compiled;
+        if (!registerSensitive) {
+            compiled = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        } else {
+            compiled = Pattern.compile(regex);
+        }
+
         while ((strLine = br.readLine()) != null) {
-            String realLine = strLine;
-            if (!registerSensitive) {
-                strLine = strLine.toLowerCase();
+            Matcher m = compiled.matcher(strLine);
+            if (m.find()) {
+                cntLineToPrint = cntLine;
             }
 
-            if (!onlyFullWord) {
-                Matcher m = Pattern.compile(regex).matcher(strLine);
-                if (m.find()) {
-                    cntLineToPrint = cntLine;
-                }
-            } else {
-                Scanner sc = new Scanner(strLine);
-                while (sc.hasNext()) {
-                    String word = sc.next();
-
-                    Matcher m = Pattern.compile(regex).matcher(word);
-
-                    if (m.find() && m.end() == word.length() && m.start() == 0) {
-                        cntLineToPrint = cntLine;
-                    }
-                }
-            }
             if (cntLineToPrint > 0) {
                 --cntLineToPrint;
-                grepResult.append(realLine);
+                grepResult.append(strLine);
                 grepResult.append("\n");
             }
         }
