@@ -1,5 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 public class Main {
     private static State state;
@@ -14,15 +15,27 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
             return;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    private static void mapCondition() throws IOException {
-        Scanner s = new Scanner(System.in);
-        String str = s.nextLine();
+    private static void mapCondition() throws IOException, InterruptedException {
+//        Scanner s = new Scanner(System.in);
+//        String str = s.nextLine();
 
-        state.setMove(str.charAt(0));
+        String[] cmd = {"/bin/sh", "-c", "stty raw </dev/tty"};
+        Runtime.getRuntime().exec(cmd).waitFor();
+
+        //Console console = System.console();
+        //Reader reader = console.reader();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        char s = (char)br.read();
+        state.setMove(s);
         state.doTerm();
+
         mapCondition();
     }
 

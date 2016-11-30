@@ -8,8 +8,9 @@ public class State {
     Character character;
 
     public State() {
-        map = new Map(10, 10);
+        map = new Map(15, 15);
         Point pt = map.getRandEmptyCell();
+        System.err.println(pt.getX() + " " + pt.getY());
         character = new Character(pt);
         map.addObject(character);
         map.setVisibility(character.getX(), character.getY());
