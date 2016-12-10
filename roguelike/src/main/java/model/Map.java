@@ -1,3 +1,5 @@
+package model;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -288,5 +290,26 @@ public class Map {
 
     public ArrayList<GameObject> getObjects() {
         return objects;
+    }
+
+    public GameObject[][] getMapToPresent() {
+        GameObject[][] map = new GameObject[simpleMap.length][simpleMap[0].length];
+        for (int i = 0; i < simpleMap.length; ++i) {
+            System.arraycopy(simpleMap[i], 0, map[i], 0, simpleMap[i].length);
+        }
+
+        for (GameObject object : objects) {
+            map[object.getX()][object.getY()] = object;
+        }
+
+        for (int i = 0; i < map.length; ++i) {
+            for (int j = 0; j < map[0].length; ++j) {
+                if (!visibility[i][j]) {
+                    map[i][j]= new SimpleCell(new Point(i, j), CellType.Unknown);
+                }
+            }
+        }
+
+        return map;
     }
 }

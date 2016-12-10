@@ -1,3 +1,5 @@
+package model;
+
 public class Character extends GameObject{
     int moveX;
     int moveY;
@@ -29,7 +31,7 @@ public class Character extends GameObject{
             pt.setY(ny);
         }
 
-        map.shoot(pt.getX(), pt.getY());
+        //map.shoot(pt.getX(), pt.getY());
     }
 
     private void setVisibility(Map map, int x, int y, int[][] used) {

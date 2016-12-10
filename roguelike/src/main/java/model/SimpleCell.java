@@ -1,3 +1,5 @@
+package model;
+
 public class SimpleCell extends GameObject {
     private CellType type;
 
