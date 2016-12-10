@@ -48,6 +48,8 @@ public class Client implements ConnectionCreator {
                                 hisName = message.getData();
                             } else if (message.getType() == MessageGRPC.MessageType.MSG_QUERY) {
                                 mng.processNewMessage(new Message(hisName, message.getData()));
+                            } else {
+                                mng.processTyping();
                             }
                         }
 

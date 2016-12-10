@@ -34,4 +34,9 @@ public class Connection {
                 setType(MessageGRPC.MessageType.MSG_QUERY).setData(text).build());
         mng.processNewMessage(new Message(myName, text));
     }
+
+    public void sendTypingNotification() {
+        messageStreamObserver.onNext(MessageGRPC.newBuilder().
+                setType(MessageGRPC.MessageType.TYPING_NOTIFICATION).build());
+    }
 }

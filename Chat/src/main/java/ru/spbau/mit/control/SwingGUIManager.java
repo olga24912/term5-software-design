@@ -75,6 +75,11 @@ public class SwingGUIManager implements GUIManager {
         chatPanel.newMsg(msg);
     }
 
+    @Override
+    public void processTyping() {
+        chatPanel.typing();
+    }
+
     //Start interaction with network
     public void startConnecting(ConnectionCreator creator) {
         this.creator = creator;
@@ -105,5 +110,9 @@ public class SwingGUIManager implements GUIManager {
         connectionFrame.setVisible(false);
         connectionFrame.dispose();
         connectionFrame = null;
+    }
+
+    public void sendTypingNotification() {
+        connection.sendTypingNotification();
     }
 }

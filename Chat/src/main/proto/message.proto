@@ -11,6 +11,7 @@ message MessageGRPC {
     enum MessageType {
         MSG_QUERY = 0;
         CONNECT_QUERY = 1;
+        TYPING_NOTIFICATION = 2;
     }
     MessageType type = 1;
     string data = 2;

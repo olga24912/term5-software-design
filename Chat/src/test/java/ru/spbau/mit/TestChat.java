@@ -25,6 +25,10 @@ public class TestChat {
             }
 
             @Override
+            public void processTyping() {
+            }
+
+            @Override
             public void processConnection(Connection connection) {
                 connect[0] = connection;
             }
@@ -38,6 +42,10 @@ public class TestChat {
             @Override
             public void processNewMessage(Message msg) {
                 msgs[1] = msg;
+            }
+
+            @Override
+            public void processTyping() {
             }
 
             @Override
