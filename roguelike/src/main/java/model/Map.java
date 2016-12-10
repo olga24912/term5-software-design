@@ -24,6 +24,9 @@ public class Map {
 
         generateMap();
         objects.add(new Mob(getRandEmptyCell()));
+        objects.add(new Tool(getRandEmptyCell()));
+        objects.add(new Mob(getRandEmptyCell()));
+        objects.add(new Tool(getRandEmptyCell()));
     }
 
     private void generateMap() {
@@ -181,9 +184,9 @@ public class Map {
         components[x][y] = 1;
     }
 
-    public gameState doTerm() throws IOException {
-        for (GameObject object : objects) {
-            object.doTerm(this);
+    public GameState doTerm() throws IOException {
+        for (int i = objects.size() - 1; i >= 0; --i) {
+            objects.get(i).doTerm(this);
         }
 
         draw();
@@ -280,10 +283,13 @@ public class Map {
         return CellType.WallV;
     }
 
-    public void shoot(int x, int y) {
+    public void shoot(GameObject killer, int x, int y) {
         for (int i = 0; i < objects.size(); ++i) {
             if (objects.get(i).getX() == x && objects.get(i).getY() == y) {
-                objects.remove(i);
+                objects.get(i).shootReaction(killer);
+                if (!objects.get(i).isAlive()) {
+                    objects.remove(i);
+                }
             }
         }
     }

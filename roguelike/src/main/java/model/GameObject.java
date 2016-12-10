@@ -10,6 +10,12 @@ public abstract class GameObject {
     public abstract char getSymbol();
     public void doTerm(Map map) {}
 
+    public boolean isAlive() {
+        return true;
+    }
+
+    public void shootReaction(GameObject killer) {}
+
     public Point getPoint() {
         return pt;
     }

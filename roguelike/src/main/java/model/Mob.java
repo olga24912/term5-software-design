@@ -8,6 +8,8 @@ public class Mob extends GameObject {
     private static final int[] dx = {0, 0, 1, -1};
     private static final int[] dy = {1, -1, 0, 0};
 
+    private boolean isAlive = true;
+
     public Mob(Point pt) {
         super(pt);
         random = new Random();
@@ -21,7 +23,7 @@ public class Mob extends GameObject {
             if (objects.get(i).getSymbol() == 'I') {
                 if ((objects.get(i).getX() - pt.getX())*(objects.get(i).getX() - pt.getX()) +
                         (objects.get(i).getY() - pt.getY())*(objects.get(i).getY() - pt.getY()) <= 1) {
-                    map.shoot(objects.get(i).getX(), objects.get(i).getY());
+                    map.shoot(this, objects.get(i).getX(), objects.get(i).getY());
                     return;
                 }
             }
@@ -33,6 +35,16 @@ public class Mob extends GameObject {
         if (map.isEmpty(npt.getX(), npt.getY())) {
             pt = npt;
         }
+    }
+
+    @Override
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    @Override
+    public void shootReaction(GameObject killer) {
+        isAlive = false;
     }
 
     @Override

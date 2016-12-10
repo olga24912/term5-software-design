@@ -1,11 +1,16 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Character extends GameObject{
     int moveX;
     int moveY;
     Point shoot = new Point(0, 0);
     private static final int[] dx = {0, 0, 1, -1};
     private static final int[] dy = {1, -1, 0, 0};
+    private boolean isAlive = true;
+
+    private ArrayList<Tool> tools = new ArrayList<>();
 
     public Character(Point pt) {
         super(pt);
@@ -26,12 +31,15 @@ public class Character extends GameObject{
             }
         }
         setVisibility(map, nx, ny, used);
+
+        if (shoot.getX() != 0 || shoot.getY() != 0) {
+            map.shoot(this, shoot.getX(), shoot.getY());
+        }
+
         if (map.isEmpty(nx, ny)) {
             pt.setX(nx);
             pt.setY(ny);
         }
-
-        //map.shoot(pt.getX(), pt.getY());
     }
 
     private void setVisibility(Map map, int x, int y, int[][] used) {
@@ -66,10 +74,10 @@ public class Character extends GameObject{
             moveX = 0;
             moveY = 1;
         } else if (c == 'i') {
-            shoot.setX(pt.getX() + 1);
+            shoot.setX(pt.getX() - 1);
             shoot.setY(pt.getY());
         } else if (c == 'k') {
-            shoot.setX(pt.getX() - 1);
+            shoot.setX(pt.getX() + 1);
             shoot.setY(pt.getY());
         } else if (c == 'j') {
             shoot.setX(pt.getX());
@@ -78,5 +86,23 @@ public class Character extends GameObject{
             shoot.setX(pt.getX());
             shoot.setY(pt.getY() + 1);
         }
+    }
+
+    @Override
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    @Override
+    public void shootReaction(GameObject killer) {
+        isAlive = false;
+    }
+
+    public void addTool(Tool tool) {
+        tools.add(tool);
+    }
+
+    public ArrayList<Tool> getTools() {
+        return tools;
     }
 }
