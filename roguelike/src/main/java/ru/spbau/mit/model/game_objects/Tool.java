@@ -2,7 +2,6 @@ package ru.spbau.mit.model.game_objects;
 
 import ru.spbau.mit.model.Point;
 
-//класс для инструментов.
 public class Tool extends GameObject {
     private boolean isAlive = true;
 

@@ -8,6 +8,7 @@ import ru.spbau.mit.model.map.MapBuilder;
 import static ru.spbau.mit.model.state.GameState.GameOver;
 import static ru.spbau.mit.model.state.GameState.Main;
 
+//game state
 public class State {
     private Map map;
 
@@ -25,6 +26,7 @@ public class State {
         return map;
     }
 
+    //reaction on key press
     public void makeMove(char c) {
         switch (gameState) {
             case GameOver:

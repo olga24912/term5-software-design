@@ -3,7 +3,7 @@ package ru.spbau.mit.control;
 import ru.spbau.mit.model.state.State;
 import ru.spbau.mit.view.View;
 
-//класс, отвечающий за состояние игры. Прослойка между моделью и отображением игры.
+//Middle class between view and model
 public class Controller {
     private View view;
     private State state;
@@ -12,13 +12,13 @@ public class Controller {
         view = new View(this);
     }
 
-    //начало новой игры
+    //start new game
     public void start() {
         state = new State();
         view.drawMap(state.getMap().getMapToPresent());
     }
 
-    //реагирует на нажатем пользователем клавишы.
+    //reaction on key press
     public void makeMove(char c) {
         state.makeMove(c);
 

@@ -8,7 +8,7 @@ import ru.spbau.mit.model.game_objects.SimpleCell;
 
 import java.util.ArrayList;
 
-//Игровая карта.
+//Class with game map and all game objects
 public class Map {
     private SimpleCell[][] simpleMap;
 
@@ -34,7 +34,7 @@ public class Map {
         this.objects = objects;
     }
 
-    //все персонажи, которые есть на карте делают свой ход.
+    //All objects on map make a move.
     public void doTerm() {
         character.doTerm(this);
         for (GameObject object: objects) {
@@ -42,14 +42,14 @@ public class Map {
         }
     }
 
-    //установить клетку видимой для персонажа.
+    //set visibility cell for character
     public void setVisibility(int x, int y) {
         if (x >= 0 && y >= 0 && x < simpleMap.length  && y < simpleMap[0].length) {
             visibility[x][y] = true;
         }
     }
 
-    //проверяет, что эта клетка свободная, то есть сюда можно наступать.
+    //check if this cell is Empty
     public boolean isEmpty(int x, int y) {
         if (x >= 0 && x < simpleMap.length) {
             if (y >= 0 && y < simpleMap[0].length) {
@@ -76,7 +76,7 @@ public class Map {
         return CellType.WallV;
     }
 
-    //килер ударил по клетке x y.
+    //Killer shoot cell(x, y). Other object need react on it
     public void shoot(GameObject killer, int x, int y) {
         if (character.getX() == x && character.getY() == y) {
             character.shootReaction(killer);
@@ -92,12 +92,12 @@ public class Map {
         }
     }
 
-    //возвращает все живые объекты на карте.
+    //Return all alive objects except character
     public ArrayList<GameObject> getObjects() {
         return objects;
     }
 
-    //Возращает карту на отрисовку.
+    //Return map for drawing
     public GameObject[][] getMapToPresent() {
         GameObject[][] map = new GameObject[simpleMap.length][simpleMap[0].length];
         for (int i = 0; i < simpleMap.length; ++i) {

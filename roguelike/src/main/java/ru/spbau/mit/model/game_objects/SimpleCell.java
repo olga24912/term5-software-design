@@ -2,7 +2,7 @@ package ru.spbau.mit.model.game_objects;
 
 import ru.spbau.mit.model.Point;
 
-//обычная клетка, на которой ничего не стоит
+//Simple static cell.
 public class SimpleCell extends GameObject {
     private CellType type;
 

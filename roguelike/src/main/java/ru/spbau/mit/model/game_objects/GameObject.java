@@ -3,7 +3,7 @@ package ru.spbau.mit.model.game_objects;
 import ru.spbau.mit.model.map.Map;
 import ru.spbau.mit.model.Point;
 
-//Объекты, которые могут быть на карте
+//All objects, that can be on map.
 public abstract class GameObject {
     protected Point pt;
 
@@ -11,17 +11,18 @@ public abstract class GameObject {
         this.pt = pt;
     }
 
-    //символ, для отрисовки на карте
+    //Symbol for display this object
     public abstract char getSymbol();
-    //элемент делает ход
+
+    //For doing something on objects term.
     public void doTerm(Map map) {}
 
-    //является ли этот персонаж еще живым.
+    //Check is object alive or not
     public boolean isAlive() {
         return true;
     }
 
-    //Как-то отреагировать на то, что тебя кто-то ударил(например, умереть)
+    //Reaction if someone make some action on you.
     public void shootReaction(GameObject killer) {}
 
     public int getX() {

@@ -5,7 +5,6 @@ import ru.spbau.mit.model.map.Map;
 
 import java.util.Random;
 
-//класс для воюющего человечка
 public class Mob extends GameObject {
     private Random random;
     private static final int[] dx = {0, 0, 1, -1};

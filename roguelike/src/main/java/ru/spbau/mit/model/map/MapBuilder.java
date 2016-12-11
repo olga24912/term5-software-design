@@ -7,6 +7,7 @@ import ru.spbau.mit.model.game_objects.Character;
 import java.util.ArrayList;
 import java.util.Random;
 
+//class for build map.
 public class MapBuilder {
     private Random rnd = new Random();
 
@@ -28,6 +29,7 @@ public class MapBuilder {
         return this;
     }
 
+    //create map
     public Map build() {
         for (int i = 0; i < mobsCount; ++i) {
             objects.add(new Mob(getRandEmptyCell()));

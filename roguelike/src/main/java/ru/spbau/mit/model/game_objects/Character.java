@@ -5,7 +5,7 @@ import ru.spbau.mit.model.Point;
 
 import java.util.ArrayList;
 
-//Класс для играющего персонажа.
+//Main character
 public class Character extends GameObject {
     int moveX;
     int moveY;
@@ -60,7 +60,7 @@ public class Character extends GameObject {
         }
     }
 
-    //установить действие, которое надо будет сделать в зависимсоти, от нажатого символа.
+    //set action, that character going to do on his term.
     public void setMove(char c) {
         moveX = 0;
         moveY = 0;
@@ -103,12 +103,12 @@ public class Character extends GameObject {
         isAlive = false;
     }
 
-    //добавить тул в список уже имеющихся.
+    //add tool to the list
     public void addTool(Tool tool) {
         tools.add(tool);
     }
 
-    //вернуть список всех тулов.
+    //return the list of tools
     public ArrayList<Tool> getTools() {
         return tools;
     }

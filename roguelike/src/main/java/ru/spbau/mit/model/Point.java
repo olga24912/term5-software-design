@@ -1,5 +1,6 @@
 package ru.spbau.mit.model;
 
+//Helpful class for coordinates
 public class Point {
     private int x;
     private int y;

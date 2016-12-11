@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-//отображения игры на экран.
+//Class for displaying game.
 public class View {
     private JTextArea output;
 
@@ -43,6 +43,7 @@ public class View {
         });
     }
 
+    //display map
     public void drawMap(GameObject[][] map) {
         StringBuilder bldr = new StringBuilder();
 
@@ -57,10 +58,12 @@ public class View {
         output.setText(bldr.toString());
     }
 
+    //display the end of game
     public void drawGameOver() {
         output.setText("GAME OVER ");
     }
 
+    //display help
     public void drawHelp() {
         output.setText("asdw - character handling\n jkli - shoot monster or take tool\n" +
                 "your turn first\n" +
@@ -69,11 +72,13 @@ public class View {
                 "c - continue play  ");
     }
 
+    //display information about tools
     public void drawTools(Character character) {
         ArrayList<Tool> tools = character.getTools();
         output.setText("Tools count:  " + tools.size());
     }
 
+    //display the end of game when character win.
     public void drawWin() {
         output.setText("YOU WIN!  ");
     }
