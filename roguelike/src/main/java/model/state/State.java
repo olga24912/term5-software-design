@@ -11,15 +11,13 @@ import static model.state.GameState.Main;
 
 public class State {
     private Map map;
-    private Character character;
 
     private GameState gameState = GameState.Main;
 
     public State() {
         map = new Map(15, 15, new bfsMapGenerator());
-        character = new Character(map.getRandEmptyCell());
-        map.addObject(character);
-        map.setVisibility(character.getX(), character.getY());
+        map.setCharacter(new Character(map.getRandEmptyCell()));
+        map.setVisibility(map.getCharacter().getX(), map.getCharacter().getY());
     }
 
     public Map getMap() {
@@ -37,18 +35,18 @@ public class State {
                 } else if (c == 't') {
                     gameState = GameState.ToolsView;
                 }
-                character.setMove(c);
+                map.getCharacter().setMove(c);
                 try {
                     map.doTerm();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                if (!character.isAlive()) {
+                if (!map.getCharacter().isAlive()) {
                     gameState = GameOver;
                 }
 
-                if (character.getTools().size() == 2) {
+                if (map.getCharacter().getTools().size() == 2) {
                     gameState = GameState.Win;
                 }
                 break;
@@ -70,6 +68,6 @@ public class State {
     }
 
     public Character getCharacter() {
-        return character;
+        return map.getCharacter();
     }
 }

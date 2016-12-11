@@ -1,9 +1,8 @@
 package model.game_objects;
 
-import model.map.Map;
 import model.Point;
+import model.map.Map;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 //класс для воюющего человечка
@@ -21,16 +20,12 @@ public class Mob extends GameObject {
 
     @Override
     public void doTerm(Map map) {
-        ArrayList<GameObject> objects = map.getObjects();
+        Character character = map.getCharacter();
 
-        for (int i = 0; i < objects.size(); ++i) {
-            if (objects.get(i).getSymbol() == 'I') {
-                if ((objects.get(i).getX() - pt.getX())*(objects.get(i).getX() - pt.getX()) +
-                        (objects.get(i).getY() - pt.getY())*(objects.get(i).getY() - pt.getY()) <= 1) {
-                    map.shoot(this, objects.get(i).getX(), objects.get(i).getY());
+        if ((character.getX() - pt.getX())*(character.getX() - pt.getX()) +
+                        (character.getY() - pt.getY())*(character.getY() - pt.getY()) <= 1) {
+                    map.shoot(this, character.getX(), character.getY());
                     return;
-                }
-            }
         }
 
         int term = (random.nextInt()%4 + 4) % 4;

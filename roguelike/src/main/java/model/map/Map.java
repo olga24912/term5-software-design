@@ -2,6 +2,7 @@ package model.map;
 
 import model.Point;
 import model.game_objects.*;
+import model.game_objects.Character;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Map {
     private Random rnd = new Random();
 
     private SimpleCell[][] simpleMap;
+    private Character character;
     private ArrayList <GameObject> objects = new ArrayList<GameObject>();
     private boolean[][] visibility;
 
@@ -34,8 +36,9 @@ public class Map {
 
     //все персонажи, которые есть на карте делают свой ход.
     public void doTerm() throws IOException {
-        for (int i = objects.size() - 1; i >= 0; --i) {
-            objects.get(i).doTerm(this);
+        character.doTerm(this);
+        for (GameObject object: objects) {
+            object.doTerm(this);
         }
     }
 
@@ -112,6 +115,10 @@ public class Map {
 
     //килер ударил по клетке x y.
     public void shoot(GameObject killer, int x, int y) {
+        if (character.getX() == x && character.getY() == y) {
+            character.shootReaction(killer);
+        }
+
         for (int i = 0; i < objects.size(); ++i) {
             if (objects.get(i).getX() == x && objects.get(i).getY() == y) {
                 objects.get(i).shootReaction(killer);
@@ -146,6 +153,16 @@ public class Map {
             }
         }
 
+        map[character.getX()][character.getY()] = character;
+
         return map;
+    }
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 }
