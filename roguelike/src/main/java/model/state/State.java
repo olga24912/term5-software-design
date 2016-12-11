@@ -1,8 +1,9 @@
 package model.state;
 
-import model.map.Map;
 import model.game_objects.Character;
-import model.map.bfsMapGenerator;
+import model.map.BfsMapGenerator;
+import model.map.Map;
+import model.map.MapBuilder;
 
 import java.io.IOException;
 
@@ -15,9 +16,11 @@ public class State {
     private GameState gameState = GameState.Main;
 
     public State() {
-        map = new Map(15, 15, new bfsMapGenerator());
-        map.setCharacter(new Character(map.getRandEmptyCell()));
-        map.setVisibility(map.getCharacter().getX(), map.getCharacter().getY());
+        map = (new MapBuilder()).setGenerator(new BfsMapGenerator()).build();
+    }
+
+    public State(Map map) {
+        this.map = map;
     }
 
     public Map getMap() {

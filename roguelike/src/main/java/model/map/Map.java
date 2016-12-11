@@ -11,14 +11,17 @@ import java.util.Random;
 //Игровая карта.
 public class Map {
     private Random rnd = new Random();
-
     private SimpleCell[][] simpleMap;
+
     private Character character;
     private ArrayList <GameObject> objects = new ArrayList<GameObject>();
     private boolean[][] visibility;
 
-    public Map(int n, int m, MapGenerator generator) {
-        simpleMap = new SimpleCell[n][m];
+    public Map(SimpleCell[][] simpleMap, ArrayList<GameObject> objects, Character character) {
+        this.simpleMap = simpleMap;
+        int n = simpleMap.length;
+        int m = simpleMap[0].length;
+
         visibility = new boolean[n][m];
 
         for (int i = 0; i < n; ++i) {
@@ -27,11 +30,9 @@ public class Map {
             }
         }
 
-        generator.generateMap(simpleMap);
-        objects.add(new Mob(getRandEmptyCell()));
-        objects.add(new Tool(getRandEmptyCell()));
-        objects.add(new Mob(getRandEmptyCell()));
-        objects.add(new Tool(getRandEmptyCell()));
+        this.character = character;
+        setVisibility(character.getX(), character.getY());
+        this.objects = objects;
     }
 
     //все персонажи, которые есть на карте делают свой ход.
@@ -79,11 +80,6 @@ public class Map {
         }
 
         return res;
-    }
-
-    //добавляет очередной объект на карту.
-    public void addObject(GameObject object) {
-        objects.add(object);
     }
 
     //проверяет, что эта клетка свободная, то есть сюда можно наступать.
@@ -160,9 +156,5 @@ public class Map {
 
     public Character getCharacter() {
         return character;
-    }
-
-    public void setCharacter(Character character) {
-        this.character = character;
     }
 }
