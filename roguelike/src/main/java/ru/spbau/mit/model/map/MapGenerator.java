@@ -1,6 +1,6 @@
-package model.map;
+package ru.spbau.mit.model.map;
 
-import model.game_objects.SimpleCell;
+import ru.spbau.mit.model.game_objects.SimpleCell;
 
 public interface MapGenerator {
     void generateMap(SimpleCell[][] simpleMap);

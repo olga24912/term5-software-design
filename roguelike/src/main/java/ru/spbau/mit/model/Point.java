@@ -1,4 +1,4 @@
-package model;
+package ru.spbau.mit.model;
 
 public class Point {
     private int x;

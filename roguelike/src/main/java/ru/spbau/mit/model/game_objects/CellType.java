@@ -1,4 +1,4 @@
-package model.game_objects;
+package ru.spbau.mit.model.game_objects;
 
 //Простые типы клеток, нижний слой.
 public enum CellType {

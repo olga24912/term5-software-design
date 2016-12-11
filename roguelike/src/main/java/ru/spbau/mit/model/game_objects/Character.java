@@ -1,7 +1,7 @@
-package model.game_objects;
+package ru.spbau.mit.model.game_objects;
 
-import model.map.Map;
-import model.Point;
+import ru.spbau.mit.model.map.Map;
+import ru.spbau.mit.model.Point;
 
 import java.util.ArrayList;
 

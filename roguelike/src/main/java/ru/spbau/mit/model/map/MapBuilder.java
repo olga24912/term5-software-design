@@ -1,8 +1,8 @@
-package model.map;
+package ru.spbau.mit.model.map;
 
-import model.Point;
-import model.game_objects.*;
-import model.game_objects.Character;
+import ru.spbau.mit.model.Point;
+import ru.spbau.mit.model.game_objects.*;
+import ru.spbau.mit.model.game_objects.Character;
 
 import java.util.ArrayList;
 import java.util.Random;

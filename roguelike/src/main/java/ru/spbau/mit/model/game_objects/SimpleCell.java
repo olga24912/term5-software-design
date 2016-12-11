@@ -1,6 +1,6 @@
-package model.game_objects;
+package ru.spbau.mit.model.game_objects;
 
-import model.Point;
+import ru.spbau.mit.model.Point;
 
 //обычная клетка, на которой ничего не стоит
 public class SimpleCell extends GameObject {

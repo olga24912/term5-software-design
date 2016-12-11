@@ -1,7 +1,7 @@
-package control;
+package ru.spbau.mit.control;
 
-import model.state.State;
-import view.View;
+import ru.spbau.mit.model.state.State;
+import ru.spbau.mit.view.View;
 
 //класс, отвечающий за состояние игры. Прослойка между моделью и отображением игры.
 public class Controller {

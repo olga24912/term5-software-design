@@ -1,9 +1,9 @@
-package view;
+package ru.spbau.mit.view;
 
-import control.Controller;
-import model.game_objects.Character;
-import model.game_objects.GameObject;
-import model.game_objects.Tool;
+import ru.spbau.mit.control.Controller;
+import ru.spbau.mit.model.game_objects.Character;
+import ru.spbau.mit.model.game_objects.GameObject;
+import ru.spbau.mit.model.game_objects.Tool;
 
 import javax.swing.*;
 import java.awt.*;

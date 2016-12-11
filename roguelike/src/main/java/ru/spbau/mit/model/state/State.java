@@ -1,14 +1,14 @@
-package model.state;
+package ru.spbau.mit.model.state;
 
-import model.game_objects.Character;
-import model.map.BfsMapGenerator;
-import model.map.Map;
-import model.map.MapBuilder;
+import ru.spbau.mit.model.game_objects.Character;
+import ru.spbau.mit.model.map.BfsMapGenerator;
+import ru.spbau.mit.model.map.Map;
+import ru.spbau.mit.model.map.MapBuilder;
 
 import java.io.IOException;
 
-import static model.state.GameState.GameOver;
-import static model.state.GameState.Main;
+import static ru.spbau.mit.model.state.GameState.GameOver;
+import static ru.spbau.mit.model.state.GameState.Main;
 
 public class State {
     private Map map;
@@ -49,7 +49,7 @@ public class State {
                     gameState = GameOver;
                 }
 
-                if (map.getCharacter().getTools().size() == 2) {
+                if (map.getObjects().size() == 0) {
                     gameState = GameState.Win;
                 }
                 break;
