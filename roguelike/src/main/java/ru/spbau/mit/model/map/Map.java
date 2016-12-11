@@ -7,11 +7,9 @@ import ru.spbau.mit.model.game_objects.GameObject;
 import ru.spbau.mit.model.game_objects.SimpleCell;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 //Игровая карта.
 public class Map {
-    private Random rnd = new Random();
     private SimpleCell[][] simpleMap;
 
     private Character character;
