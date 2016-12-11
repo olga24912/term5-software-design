@@ -24,10 +24,6 @@ public abstract class GameObject {
     //Как-то отреагировать на то, что тебя кто-то ударил(например, умереть)
     public void shootReaction(GameObject killer) {}
 
-    public Point getPoint() {
-        return pt;
-    }
-
     public int getX() {
         return pt.getX();
     }

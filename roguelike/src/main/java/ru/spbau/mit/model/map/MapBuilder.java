@@ -47,6 +47,7 @@ public class MapBuilder {
     public MapBuilder setN(int n) {
         this.n = n;
         genSimpleMap();
+
         return this;
     }
 

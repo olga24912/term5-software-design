@@ -1,10 +1,11 @@
 package ru.spbau.mit.model.map;
 
 import ru.spbau.mit.model.Point;
-import ru.spbau.mit.model.game_objects.*;
+import ru.spbau.mit.model.game_objects.CellType;
 import ru.spbau.mit.model.game_objects.Character;
+import ru.spbau.mit.model.game_objects.GameObject;
+import ru.spbau.mit.model.game_objects.SimpleCell;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -36,7 +37,7 @@ public class Map {
     }
 
     //все персонажи, которые есть на карте делают свой ход.
-    public void doTerm() throws IOException {
+    public void doTerm() {
         character.doTerm(this);
         for (GameObject object: objects) {
             object.doTerm(this);
@@ -48,38 +49,6 @@ public class Map {
         if (x >= 0 && y >= 0 && x < simpleMap.length  && y < simpleMap[0].length) {
             visibility[x][y] = true;
         }
-    }
-
-    //возращает случайную пустую клетку
-    public Point getRandEmptyCell() {
-        int cntEmpty = 0;
-        int n = simpleMap.length;
-        int m = simpleMap[0].length;
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
-                if (isEmpty(i, j)) {
-                    ++cntEmpty;
-                }
-            }
-        }
-
-        int num = (rnd.nextInt()%cntEmpty + cntEmpty)%cntEmpty;
-
-        Point res = new Point(0, 0);
-        cntEmpty = 0;
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
-                if (isEmpty(i, j)) {
-                    if (cntEmpty == num) {
-                        res.setX(i);
-                        res.setY(j);
-                    }
-                    cntEmpty++;
-                }
-            }
-        }
-
-        return res;
     }
 
     //проверяет, что эта клетка свободная, то есть сюда можно наступать.

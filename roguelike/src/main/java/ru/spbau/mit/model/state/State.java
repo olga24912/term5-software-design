@@ -5,8 +5,6 @@ import ru.spbau.mit.model.map.BfsMapGenerator;
 import ru.spbau.mit.model.map.Map;
 import ru.spbau.mit.model.map.MapBuilder;
 
-import java.io.IOException;
-
 import static ru.spbau.mit.model.state.GameState.GameOver;
 import static ru.spbau.mit.model.state.GameState.Main;
 
@@ -37,13 +35,10 @@ public class State {
                     break;
                 } else if (c == 't') {
                     gameState = GameState.ToolsView;
+                    break;
                 }
                 map.getCharacter().setMove(c);
-                try {
-                    map.doTerm();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                map.doTerm();
 
                 if (!map.getCharacter().isAlive()) {
                     gameState = GameOver;

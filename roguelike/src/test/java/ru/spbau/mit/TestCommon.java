@@ -29,11 +29,15 @@ public class TestCommon {
         state.getCharacter().shootReaction(new Mob(new Point(0, 0)));
         state.makeMove('w');
         assertEquals(state.getGameState(), GameState.GameOver);
+        state.makeMove('s');
+        assertEquals(state.getGameState(), GameState.GameOver);
     }
 
     @Test
     public void testCharacterMove() {
-        Map map = (new MapBuilder()).setCharacter((new Character(new Point(5, 5)))).setMobsCount(0).build();
+        Map map = (new MapBuilder()).setN(10).setM(10).
+                setCharacter((new Character(new Point(5, 5)))).
+                setMobsCount(0).build();
 
         State state = new State(map);
 
@@ -65,23 +69,23 @@ public class TestCommon {
         State state = new State(map);
 
         state.makeMove('i');
-        assertEquals(map.getCharacter().getTools().size(), 1);
-        assertEquals(map.getObjects().size(),  3);
+        assertEquals(state.getMap().getCharacter().getTools().size(), 1);
+        assertEquals(state.getMap().getObjects().size(),  3);
 
         state.makeMove('w');
         state.makeMove('l');
-        assertEquals(map.getCharacter().getTools().size(), 2);
-        assertEquals(map.getObjects().size(), 2);
+        assertEquals(state.getMap().getCharacter().getTools().size(), 2);
+        assertEquals(state.getMap().getObjects().size(), 2);
 
         state.makeMove('d');
         state.makeMove('k');
-        assertEquals(map.getCharacter().getTools().size(), 3);
-        assertEquals(map.getObjects().size(), 1);
+        assertEquals(state.getMap().getCharacter().getTools().size(), 3);
+        assertEquals(state.getMap().getObjects().size(), 1);
 
         state.makeMove('s');
         state.makeMove('j');
-        assertEquals(map.getCharacter().getTools().size(), 4);
-        assertEquals(map.getObjects().size(), 0);
+        assertEquals(state.getMap().getCharacter().getTools().size(), 4);
+        assertEquals(state.getMap().getObjects().size(), 0);
 
         assertEquals(state.getGameState(), GameState.Win);
     }
