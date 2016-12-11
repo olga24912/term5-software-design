@@ -1,5 +1,8 @@
-package model;
+package model.game_objects;
 
+import model.Point;
+
+//класс для инструментов.
 public class Tool extends GameObject {
     private boolean isAlive = true;
 

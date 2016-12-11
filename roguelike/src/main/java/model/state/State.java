@@ -1,30 +1,29 @@
-import model.Character;
-import model.GameState;
-import model.Map;
+package model.state;
+
+import model.map.Map;
+import model.game_objects.Character;
+import model.map.bfsMapGenerator;
 
 import java.io.IOException;
 
-/**
- * Created by olga on 10.12.16.
- */
-public class Controller {
-    private View view;
+import static model.state.GameState.GameOver;
+import static model.state.GameState.Main;
+
+public class State {
     private Map map;
-    Character character;
+    private Character character;
 
     private GameState gameState = GameState.Main;
 
-    Controller() {
-        view = new View(this);
-    }
-
-    public void start() {
-        map = new Map(15, 15);
+    public State() {
+        map = new Map(15, 15, new bfsMapGenerator());
         character = new Character(map.getRandEmptyCell());
         map.addObject(character);
         map.setVisibility(character.getX(), character.getY());
+    }
 
-        view.drawMap(map.getMapToPresent());
+    public Map getMap() {
+        return map;
     }
 
     public void makeMove(char c) {
@@ -46,7 +45,7 @@ public class Controller {
                 }
 
                 if (!character.isAlive()) {
-                    gameState = GameState.GameOver;
+                    gameState = GameOver;
                 }
 
                 if (character.getTools().size() == 2) {
@@ -55,31 +54,22 @@ public class Controller {
                 break;
             case Help:
                 if (c == 'c') {
-                    gameState = GameState.Main;
+                    gameState = Main;
                 }
                 break;
             case ToolsView:
                 if (c == 'c') {
-                    gameState = GameState.Main;
+                    gameState = Main;
                 }
                 break;
         }
+    }
 
-        switch (gameState) {
-            case Main:
-                view.drawMap(map.getMapToPresent());
-                break;
-            case GameOver:
-                view.drawGameOver();
-                break;
-            case Help:
-                view.drawHelp();
-                break;
-            case ToolsView:
-                view.drawTools(character);
-                break;
-            case Win:
-                view.drawWin();
-        }
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public Character getCharacter() {
+        return character;
     }
 }

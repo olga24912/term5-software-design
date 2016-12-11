@@ -1,0 +1,151 @@
+package model.map;
+
+import model.Point;
+import model.game_objects.*;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+
+//Игровая карта.
+public class Map {
+    private Random rnd = new Random();
+
+    private SimpleCell[][] simpleMap;
+    private ArrayList <GameObject> objects = new ArrayList<GameObject>();
+    private boolean[][] visibility;
+
+    public Map(int n, int m, MapGenerator generator) {
+        simpleMap = new SimpleCell[n][m];
+        visibility = new boolean[n][m];
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                visibility[i][j] = false;
+            }
+        }
+
+        generator.generateMap(simpleMap);
+        objects.add(new Mob(getRandEmptyCell()));
+        objects.add(new Tool(getRandEmptyCell()));
+        objects.add(new Mob(getRandEmptyCell()));
+        objects.add(new Tool(getRandEmptyCell()));
+    }
+
+    //все персонажи, которые есть на карте делают свой ход.
+    public void doTerm() throws IOException {
+        for (int i = objects.size() - 1; i >= 0; --i) {
+            objects.get(i).doTerm(this);
+        }
+    }
+
+    //установить клетку видимой для персонажа.
+    public void setVisibility(int x, int y) {
+        if (x >= 0 && y >= 0 && x < simpleMap.length  && y < simpleMap[0].length) {
+            visibility[x][y] = true;
+        }
+    }
+
+    //возращает случайную пустую клетку
+    public Point getRandEmptyCell() {
+        int cntEmpty = 0;
+        int n = simpleMap.length;
+        int m = simpleMap[0].length;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                if (isEmpty(i, j)) {
+                    ++cntEmpty;
+                }
+            }
+        }
+
+        int num = (rnd.nextInt()%cntEmpty + cntEmpty)%cntEmpty;
+
+        Point res = new Point(0, 0);
+        cntEmpty = 0;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                if (isEmpty(i, j)) {
+                    if (cntEmpty == num) {
+                        res.setX(i);
+                        res.setY(j);
+                    }
+                    cntEmpty++;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    //добавляет очередной объект на карту.
+    public void addObject(GameObject object) {
+        objects.add(object);
+    }
+
+    //проверяет, что эта клетка свободная, то есть сюда можно наступать.
+    public boolean isEmpty(int x, int y) {
+        if (x >= 0 && x < simpleMap.length) {
+            if (y >= 0 && y < simpleMap[0].length) {
+                if (simpleMap[x][y].getType() == CellType.Empty || simpleMap[x][y].getType() == CellType.Road) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int getXLen() {
+        return simpleMap.length;
+    }
+    public int getYLen() {
+        return simpleMap[0].length;
+    }
+    public CellType getCellType(int x, int y) {
+        if (x >= 0 && x < simpleMap.length) {
+            if (y >= 0 && y < simpleMap[0].length) {
+                return simpleMap[x][y].getType();
+            }
+        }
+        return CellType.WallV;
+    }
+
+    //килер ударил по клетке x y.
+    public void shoot(GameObject killer, int x, int y) {
+        for (int i = 0; i < objects.size(); ++i) {
+            if (objects.get(i).getX() == x && objects.get(i).getY() == y) {
+                objects.get(i).shootReaction(killer);
+                if (!objects.get(i).isAlive()) {
+                    objects.remove(i);
+                }
+            }
+        }
+    }
+
+    //возвращает все живые объекты на карте.
+    public ArrayList<GameObject> getObjects() {
+        return objects;
+    }
+
+    //Возращает карту на отрисовку.
+    public GameObject[][] getMapToPresent() {
+        GameObject[][] map = new GameObject[simpleMap.length][simpleMap[0].length];
+        for (int i = 0; i < simpleMap.length; ++i) {
+            System.arraycopy(simpleMap[i], 0, map[i], 0, simpleMap[i].length);
+        }
+
+        for (GameObject object : objects) {
+            map[object.getX()][object.getY()] = object;
+        }
+
+        for (int i = 0; i < map.length; ++i) {
+            for (int j = 0; j < map[0].length; ++j) {
+                if (!visibility[i][j]) {
+                    map[i][j]= new SimpleCell(new Point(i, j), CellType.Unknown);
+                }
+            }
+        }
+
+        return map;
+    }
+}

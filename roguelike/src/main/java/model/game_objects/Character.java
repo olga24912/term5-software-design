@@ -1,8 +1,12 @@
-package model;
+package model.game_objects;
+
+import model.map.Map;
+import model.Point;
 
 import java.util.ArrayList;
 
-public class Character extends GameObject{
+//Класс для играющего персонажа.
+public class Character extends GameObject {
     int moveX;
     int moveY;
     Point shoot = new Point(0, 0);
@@ -10,7 +14,7 @@ public class Character extends GameObject{
     private static final int[] dy = {1, -1, 0, 0};
     private boolean isAlive = true;
 
-    private ArrayList<Tool> tools = new ArrayList<>();
+    private ArrayList<Tool> tools = new ArrayList<Tool>();
 
     public Character(Point pt) {
         super(pt);
@@ -56,6 +60,7 @@ public class Character extends GameObject{
         }
     }
 
+    //установить действие, которое надо будет сделать в зависимсоти, от нажатого символа.
     public void setMove(char c) {
         moveX = 0;
         moveY = 0;
@@ -98,10 +103,12 @@ public class Character extends GameObject{
         isAlive = false;
     }
 
+    //добавить тул в список уже имеющихся.
     public void addTool(Tool tool) {
         tools.add(tool);
     }
 
+    //вернуть список всех тулов.
     public ArrayList<Tool> getTools() {
         return tools;
     }

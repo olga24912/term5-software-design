@@ -1,5 +1,8 @@
-package model;
+package model.game_objects;
 
+import model.Point;
+
+//обычная клетка, на которой ничего не стоит
 public class SimpleCell extends GameObject {
     private CellType type;
 

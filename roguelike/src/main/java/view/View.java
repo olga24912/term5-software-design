@@ -1,6 +1,9 @@
-import model.Character;
-import model.GameObject;
-import model.Tool;
+package view;
+
+import control.Controller;
+import model.game_objects.Character;
+import model.game_objects.GameObject;
+import model.game_objects.Tool;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,14 +11,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-/**
- * Created by olga on 10.12.16.
- */
+//отображения игры на экран.
 public class View {
     private JTextArea output;
-    private Controller controller;
 
-    public View(Controller controller) {
+    public View(final Controller controller) {
         output = new JTextArea(20, 50);
         output.setFont(new Font("monospaced", Font.PLAIN, 12));
 
@@ -25,8 +25,6 @@ public class View {
         console.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         console.pack();
         console.setVisible(true);
-
-        this.controller = controller;
 
         output.addKeyListener(new KeyListener() {
             @Override
