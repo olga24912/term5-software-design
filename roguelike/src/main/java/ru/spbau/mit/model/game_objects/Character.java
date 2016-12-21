@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 //Main character
 public class Character extends GameObject {
-    int moveX;
-    int moveY;
-    Point shoot = new Point(0, 0);
+    private int moveX;
+    private int moveY;
+    private Point shoot = new Point(0, 0);
     private static final int[] dx = {0, 0, 1, -1};
     private static final int[] dy = {1, -1, 0, 0};
     private boolean isAlive = true;
@@ -60,7 +60,7 @@ public class Character extends GameObject {
         }
     }
 
-    //set action, that character going to do on his term.
+    ///set action, that character going to do on his term.
     public void setMove(char c) {
         moveX = 0;
         moveY = 0;
