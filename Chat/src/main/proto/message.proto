@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname="MessageProto";
+option java_package = "ru.spbau.mit";
+option objc_class_prefix = "MP";
+
+package ru.spbau.mit;
+
+message MessageGRPC {
+    enum MessageType {
+        MSG_QUERY = 0;
+        CONNECT_QUERY = 1;
+        TYPING_NOTIFICATION = 2;
+    }
+    MessageType type = 1;
+    string data = 2;
+}
+
+service Messenger {
+    rpc chat (stream MessageGRPC) returns (stream MessageGRPC) {}
+}
