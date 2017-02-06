@@ -1,10 +1,8 @@
-package ru.spbau.mit;
+package ru.spbau.mit.Command;
 
 import java.util.ArrayList;
 
-/**
- * abstract class for all commands (like echo, pwd, wc, ..., NOT for: =, |)
- */
+/** abstract class for all commands (like echo, pwd, wc, ..., NOT for: =, |) */
 public abstract class Command extends Statement {
     private ArrayList<String> args;
 
@@ -16,7 +14,7 @@ public abstract class Command extends Statement {
         return args.get(i);
     }
 
-    public ArrayList<String> getArgs() {
+    public Iterable<String> getArgs() {
         return args;
     }
 
@@ -24,7 +22,10 @@ public abstract class Command extends Statement {
         return args.size();
     }
 
-    //add argument for command
+    /**
+     * add argument for command
+     * @param val value of new arg
+     */
     public void addArg(String val) {
         args.add(val);
     }

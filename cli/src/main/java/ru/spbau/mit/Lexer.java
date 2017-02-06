@@ -2,9 +2,7 @@ package ru.spbau.mit;
 
 import java.util.ArrayList;
 
-/**
- * Class that parse string to tokens.
- */
+/** Class that parses string to tokens.*/
 public class Lexer {
     private String string;
     private ArrayList<Token> tokens;
@@ -14,7 +12,7 @@ public class Lexer {
      *
      * @param currentLine string that we like to split on token
      * @return splitting on tokens
-     * @throws ParsingException
+     * @throws ParsingException throws when expression isn't correct.
      */
     public ArrayList<Token> parseString(String currentLine) throws ParsingException {
         string = currentLine + ' ';
@@ -70,9 +68,9 @@ public class Lexer {
             rightPosition = readWord(leftPosition);
             if (leftPosition != rightPosition) {
                 tokens.add(new Token(string.substring(leftPosition, rightPosition), TokenType.TokenText));
-
             }
         }
+
         switch (string.charAt(rightPosition)) {
             case ' ':
                 tokens.add(new Token(" ", TokenType.TokenSpace));

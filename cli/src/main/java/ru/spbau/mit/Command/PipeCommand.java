@@ -1,4 +1,7 @@
-package ru.spbau.mit;
+package ru.spbau.mit.Command;
+
+import ru.spbau.mit.Environment;
+import ru.spbau.mit.ExecutionResult;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,8 +11,8 @@ import java.io.InputStream;
  * Have left part of command and right part
  */
 public class PipeCommand extends Statement {
-    Statement left;
-    Statement right;
+    private Statement left;
+    private Statement right;
 
     public PipeCommand(Statement left, Statement right) {
         this.left = left;

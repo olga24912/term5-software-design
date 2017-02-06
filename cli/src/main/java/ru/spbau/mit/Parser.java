@@ -1,20 +1,20 @@
 package ru.spbau.mit;
 
+import ru.spbau.mit.Command.*;
+
 import java.util.ArrayList;
 
-/**
- * construct AST from tokens, that we can execute
- */
+/** construct AST from tokens, that we can execute */
 public class Parser {
-    ArrayList<Token> tokens;
-    int position;
+    private ArrayList<Token> tokens;
+    private int position;
 
     /**
      * build AST from tokens
      *
      * @param tokens result of lexer
      * @return root of AST, that we can execute
-     * @throws ParsingException
+     * @throws ParsingException throws when expression isn't correct.
      */
     public CommandLine buildAST(ArrayList<Token> tokens) throws ParsingException {
         this.tokens = tokens;
@@ -35,6 +35,24 @@ public class Parser {
             throw new AssertionError();
         }
 
+        Command currentCommand = getCommand();
+
+        ++position;
+        skipBlank();
+        while (position < tokens.size() && currentToken().getType() != TokenType.TokenPipe) {
+            currentCommand.addArg(parseArg());
+            skipBlank();
+        }
+
+        if (position == tokens.size()) {
+            return currentCommand;
+        } else {
+            ++position;
+            return new PipeCommand(currentCommand, parseStatement());
+        }
+    }
+
+    private Command getCommand() {
         Command currentCommand;
         switch (currentToken().getTextValue()) {
             case "echo":
@@ -59,20 +77,7 @@ public class Parser {
                 currentCommand = new UnknownCommand(currentToken().getTextValue());
                 break;
         }
-
-        ++position;
-        skipBlank();
-        while(position < tokens.size() && currentToken().getType() != TokenType.TokenPipe) {
-            currentCommand.addArg(parseArg());
-            skipBlank();
-        }
-
-        if (position == tokens.size()) {
-            return currentCommand;
-        } else {
-            ++position;
-            return new PipeCommand(currentCommand, parseStatement());
-        }
+        return currentCommand;
     }
 
     private String parseArg() throws ParsingException {

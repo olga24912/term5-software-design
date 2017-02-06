@@ -1,4 +1,8 @@
-package ru.spbau.mit;
+package ru.spbau.mit.Command;
+
+import ru.spbau.mit.Environment;
+import ru.spbau.mit.ExecutionResult;
+import ru.spbau.mit.Utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -7,10 +11,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * Class for command cat
+ * Class for 'cat' command
  *
  * args - it is names of files
- * write concatenation content of files,
+ * writes concatenation of contents of the files,
  * if count of args = 0, write from inputStream
  * if count of args > 0, ignore inputStream
  */
@@ -24,6 +28,7 @@ public class CatCommand extends Command {
             for (String fileName : getArgs()) {
                 FileInputStream fileInputStream = new FileInputStream(fileName);
                 Utils.fromInputStreamToBytes(fileInputStream, bytesFromFiles);
+                fileInputStream.close();
             }
             byte[] bytes = new byte[bytesFromFiles.size()];
             for (int i = 0; i < bytesFromFiles.size(); ++i) {

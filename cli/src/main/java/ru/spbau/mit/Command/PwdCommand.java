@@ -1,4 +1,8 @@
-package ru.spbau.mit;
+package ru.spbau.mit.Command;
+
+import ru.spbau.mit.Command.Command;
+import ru.spbau.mit.Environment;
+import ru.spbau.mit.ExecutionResult;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -6,7 +10,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Class for command pwd
+ * Class for 'exit' command
  *
  * ignore inputStream,
  * write to inputStream in ExecutionResult path to current directory

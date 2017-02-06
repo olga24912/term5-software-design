@@ -1,9 +1,13 @@
-package ru.spbau.mit;
+package ru.spbau.mit.Command;
+
+import ru.spbau.mit.Command.Command;
+import ru.spbau.mit.Environment;
+import ru.spbau.mit.ExecutionResult;
 
 import java.io.InputStream;
 
 /**
- * Class for command exit
+ * Class for 'exit' command
  *
  * ignore inputStream,
  * put the finishFlag = true in ExecutionResult

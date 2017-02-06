@@ -1,4 +1,8 @@
-package ru.spbau.mit;
+package ru.spbau.mit.Command;
+
+import ru.spbau.mit.Environment;
+import ru.spbau.mit.ExecutionResult;
+import ru.spbau.mit.Utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +15,7 @@ import java.io.OutputStream;
  * ignore inputStream,.
  */
 public class UnknownCommand extends Command {
-    String name;
+    private String name;
 
     public UnknownCommand(String name) {
         this.name = name;

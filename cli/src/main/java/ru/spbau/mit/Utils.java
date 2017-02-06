@@ -6,15 +6,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-/**
- * class for some helping function
- */
+/** class for some helping function */
 public class Utils {
     /**
      * Read from input stream to output stream
      * @param in input stream
      * @param out output stream
-     * @throws IOException
+     * @throws IOException throws when you cann't read from inputStream or write in outputStream
      */
     public static void fromInputStreamToOutputStream(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
@@ -28,7 +26,7 @@ public class Utils {
      * Read from input stream to ArrayList of bytes
      * @param in input stream
      * @param bytes ArrayList of bytes
-     * @throws IOException
+     * @throws IOException throws when you cann't read from inputStream
      */
     public static void fromInputStreamToBytes(InputStream in, ArrayList<Byte> bytes) throws IOException {
         byte[] buffer = new byte[1024];
@@ -41,6 +39,11 @@ public class Utils {
 
     }
 
+    /**
+     * Generate input stream with string s from string s
+     * @param s input data
+     * @return input stream with string s
+     */
     public static InputStream fromStringToInputStream (String s) {
         return new ByteArrayInputStream(s.getBytes());
     }

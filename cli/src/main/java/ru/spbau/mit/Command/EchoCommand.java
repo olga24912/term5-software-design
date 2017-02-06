@@ -1,10 +1,13 @@
-package ru.spbau.mit;
+package ru.spbau.mit.Command;
+
+import ru.spbau.mit.Environment;
+import ru.spbau.mit.ExecutionResult;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 /**
- * Class for command echo
+ * Class for 'echo' command
  *
  * ignore inputStream,
  * write to inputStream in ExecutionResult concatenation of args with space between them.

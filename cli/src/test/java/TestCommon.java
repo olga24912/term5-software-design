@@ -7,8 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class TestCommon {
     private Lexer lexer;
@@ -31,7 +30,7 @@ public class TestCommon {
         try {
             tempFile = File.createTempFile("tmp", ".tmp");
         } catch (IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         PrintWriter writer = null;
@@ -39,7 +38,7 @@ public class TestCommon {
         try {
             writer = new PrintWriter(tempFile.getCanonicalPath());
         } catch (IOException e) {
-            assertFalse(true);
+            fail();
         }
 
         writer.println("The first line");
@@ -48,266 +47,172 @@ public class TestCommon {
     }
 
     @Test
-    public void testEcho() {
+    public void testEcho() throws ParsingException, IOException {
         command = "echo 1 2 3";
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
+        assertNotNull(executionResult.getStdout());
 
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            assertEquals("1 2 3\n", result);
-        } else {
-            assertFalse(true);
-        }
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
+        assertEquals("1 2 3\n", result);
     }
 
     @Test
-    public void testExit() {
+    public void testExit() throws ParsingException, IOException {
         command = "exit";
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
         assert(executionResult.isFinishFlag());
     }
 
     @Test
-    public void testAssignment() {
+    public void testAssignment() throws ParsingException, IOException {
         command = "a=b";
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
         assertEquals(environment.getVariable("a"), "b");
     }
 
     @Test
-    public void testWc() {
-        try {
-            command = "wc " + tempFile.getCanonicalPath();
-        } catch (IOException e) {
-            assertFalse(true);
-        }
+    public void testWc() throws IOException, ParsingException {
+        command = "wc " + tempFile.getCanonicalPath();
+
         ExecutionResult executionResult = null;
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
 
-        assertFalse(executionResult == null);
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            assertEquals("3 6 31\n", result);
-        } else {
-            assertFalse(true);
-        }
+        assertNotNull(executionResult);
+        assertNotNull(executionResult.getStdout());
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
+        assertEquals("3 6 31\n", result);
     }
 
     @Test
-    public void testCat() {
-        try {
-            command = "cat " + tempFile.getCanonicalPath();
-        } catch (IOException e) {
-            assertFalse(true);
-        }
+    public void testCat() throws IOException, ParsingException {
+        command = "cat " + tempFile.getCanonicalPath();
+
         ExecutionResult executionResult = null;
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
+        assertNotNull(executionResult.getStdout());
 
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            assertEquals("The first line\nThe second line\n", result);
-        } else {
-            assertFalse(true);
-        }
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
+        assertEquals("The first line\nThe second line\n", result);
     }
 
     @Test
-    public void testPwd() {
+    public void testPwd() throws ParsingException, IOException {
         command = "pwd";
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
+
+        assertNotNull(executionResult);
+        assertNotNull(executionResult.getStdout());
+
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
         try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
-
-        assertFalse(executionResult == null);
-
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            try {
-                assertEquals(new File( "." ).getCanonicalPath() + '\n', result);
-            } catch (IOException e) {
-                assertFalse(true);
-            }
-        } else {
-            assertFalse(true);
+            assertEquals(new File(".").getCanonicalPath() + '\n', result);
+        } catch (IOException e) {
+            fail();
         }
     }
 
     @Test
-    public void testPipe() {
+    public void testPipe() throws ParsingException, IOException {
         command = "echo 1 | wc";
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
+        assertNotNull(executionResult.getStdout());
 
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            assertEquals("1 1 2\n", result);
-        } else {
-            assertFalse(true);
-        }
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
+        assertEquals("1 1 2\n", result);
     }
 
     @Test
-    public void testPipeCat() {
+    public void testPipeCat() throws ParsingException, IOException {
         command = "echo \" 3432 \" | cat";
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
+        assertNotNull(executionResult.getStdout());
 
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            assertEquals(" 3432 \n", result);
-        } else {
-            assertFalse(true);
-        }
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
+        assertEquals(" 3432 \n", result);
     }
 
     @Test
-    public void testVariable() {
+    public void testVariable() throws ParsingException, IOException {
         command = "echo $a";
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+        executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
+        assertNotNull(executionResult.getStdout());
 
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            assertEquals("\n", result);
-        } else {
-            assertFalse(true);
-        }
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
+        assertEquals("\n", result);
     }
 
     @Test
-    public void testGrep() {
-        try {
-            command = "grep " + " \"f[a-z]{2,3}t\" " + tempFile.getCanonicalPath();
-        } catch (IOException e) {
-            assertFalse(true);
-        }
-        ExecutionResult executionResult = null;
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+    public void testGrep() throws IOException, ParsingException {
+        command = "grep " + " \"f[a-z]{2,3}t\" " + tempFile.getCanonicalPath();
+
+        ExecutionResult executionResult = Main.processOneLine(command, lexer, environment, parser);
 
         assertFalse(executionResult == null);
 
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            assertEquals("The first line\n", result);
-        } else {
-            assertFalse(true);
-        }
+        assertNotNull(executionResult.getStdout());
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
+        assertEquals("The first line\n", result);
     }
 
     @Test
-    public void testGrepFlag() {
-        try {
-            command = "grep " + " -w -i -A 2 \"F[a-z]{2,3}T\" " + tempFile.getCanonicalPath();
-        } catch (IOException e) {
-            assertFalse(true);
-        }
-        ExecutionResult executionResult = null;
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+    public void testGrepFlag() throws IOException, ParsingException {
+        command = "grep " + " -w -i -A 2 \"F[a-z]{2,3}T\" " + tempFile.getCanonicalPath();
 
-        assertFalse(executionResult == null);
+        ExecutionResult executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            assertEquals("The first line\nThe second line\n", result);
-        } else {
-            assertFalse(true);
-        }
+        assertNotNull(executionResult);
+        assertNotNull(executionResult.getStdout());
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
+        assertEquals("The first line\nThe second line\n", result);
     }
 
     @Test
-    public void testGrepPipe() {
+    public void testGrepPipe() throws ParsingException, IOException {
         command = "echo \"sdfdfirstsdf\naaaa\nfirst\na\na\n\na\" | grep " + " -i -A 2 \"F[a-z]{2,3}T\" ";
-        ExecutionResult executionResult = null;
-        try {
-            executionResult = Main.processOneLine(command, lexer, environment, parser);
-        } catch (ParsingException | IOException e) {
-            assertFalse(true);
-        }
+        ExecutionResult executionResult = Main.processOneLine(command, lexer, environment, parser);
 
-        assertFalse(executionResult == null);
+        assertNotNull(executionResult);
+        assertNotNull(executionResult.getStdout());
 
-        if (executionResult.getStdout() != null) {
-            String result;
-            Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
-            result = scanner.next();
-            assertEquals("sdfdfirstsdf\n" +
-                    "aaaa\n" +
-                    "first\n" +
-                    "a\n", result);
-        } else {
-            assertFalse(true);
-        }
+        String result;
+        Scanner scanner = new Scanner(executionResult.getStdout()).useDelimiter("\\A");
+        result = scanner.next();
+        assertEquals("sdfdfirstsdf\n" +
+                "aaaa\n" +
+                "first\n" +
+                "a\n", result);
     }
 }

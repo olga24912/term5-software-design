@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Class for store values of variables
- */
+/** Class for store values of variables */
 public class Environment {
     private Map<String, String> variable = new HashMap<>();
 
@@ -18,15 +16,19 @@ public class Environment {
      * @param tokens that string split on.
      * @return change variable token to value and merge tokens to string
      */
-    public String substituteVariable(ArrayList<Token> tokens) {
-        StringBuilder  result = new StringBuilder();
+     public String substituteVariable(ArrayList<Token> tokens) {
+        StringBuilder result = new StringBuilder();
         for (Token token : tokens) {
             result.append(token.substitute(this));
         }
         return result.toString();
     }
 
-    // get variable value
+    /**
+     * get variable value
+     * @param name of variable
+     * @return variable value
+     */
     public String getVariable(String name) {
         if (variable.containsKey(name)) {
             return variable.get(name);
@@ -34,7 +36,11 @@ public class Environment {
         return "";
     }
 
-    // change variable value
+    /**
+     * change variable value
+     * @param name of variable
+     * @param value new value of var
+     */
     public void setVariable(String name, String value) {
         variable.put(name, value);
     }

@@ -1,4 +1,6 @@
-package ru.spbau.mit;
+package ru.spbau.mit.Command;
+
+import ru.spbau.mit.Command.CommandLine;
 
 /**
  * for pipe and command.

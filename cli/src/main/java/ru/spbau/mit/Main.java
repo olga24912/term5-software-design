@@ -1,13 +1,12 @@
 package ru.spbau.mit;
 
+import ru.spbau.mit.Command.CommandLine;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Point of starting
- */
-
+/** Point of starting */
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -15,7 +14,7 @@ public class Main {
         Environment environment = new Environment();
         Parser parser = new Parser();
         boolean finishFlag = false;
-        while(!finishFlag) {
+        while (!finishFlag) {
             try {
                 String currentLine = in.nextLine();
                 ExecutionResult executionResult = processOneLine(currentLine, lexer, environment, parser);

@@ -1,4 +1,7 @@
-package ru.spbau.mit;
+package ru.spbau.mit.Command;
+
+import ru.spbau.mit.Environment;
+import ru.spbau.mit.ExecutionResult;
 
 import java.io.InputStream;
 /**
@@ -9,13 +12,22 @@ public class Assignment implements CommandLine {
     private String var;
     private String data;
 
-    // var - name of variable, data - new value (var=data)
+    /**
+     * var=data
+     * @param var name of variable
+     * @param data new value
+     */
     public Assignment(String var, String data) {
         this.var = var;
         this.data = data;
     }
 
-    // put in environment new value
+    /**
+     * put new value into environment
+     * @param environment info about variable in fact use only in assignment
+     * @param stdin InputStream
+     * @return empty ExectionResult
+     */
     @Override
     public ExecutionResult execute(Environment environment, InputStream stdin) {
         environment.setVariable(var, data);

@@ -1,7 +1,7 @@
 /**
- * This project contain next classes:
+ * This project contains next classes:
  *  Main:
- *      methods: main() - contain Environment, Lexer, Parse
+ *      methods: main() - contains Environment, Lexer, Parse
  *                        read string,
  *                        split to Token use Lexer,
  *                        use Environment for substitute variable,
@@ -36,7 +36,6 @@
  *              -PwdCommand
  *              -UnknownCommand
  *              -WcCommand
- *              -GrepCommand
  *
  *      methods: execute() - take Environment and inputStream
  *                           return ExecutionResult (result in inputStream and FinishFlag(become true in exit command))
@@ -46,3 +45,5 @@
  * ParsingException: class for exception while split on tokens or parsing
  *
  **/
+
+package ru.spbau.mit;
