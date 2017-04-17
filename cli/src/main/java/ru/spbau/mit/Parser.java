@@ -73,6 +73,12 @@ public class Parser {
             case "grep":
                 currentCommand = new GrepCommand();
                 break;
+            case "cd":
+                currentCommand = new CdCommand();
+                break;
+            case "ls":
+                currentCommand = new LsCommand();
+                break;
             default:
                 currentCommand = new UnknownCommand(currentToken().getTextValue());
                 break;
